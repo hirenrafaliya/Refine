@@ -1,7 +1,6 @@
 package com.app.refine.model
 
-import org.bson.Document
-import org.bson.codecs.pojo.annotations.BsonProperty
+import com.google.gson.annotations.SerializedName
 import org.bson.types.ObjectId
 import java.util.*
 
@@ -9,8 +8,8 @@ data class Article(
         val _id: ObjectId,
         val type: String,
         val display: Display,
-        @BsonProperty("content")
-        val contentList: List<Content>,
+        @SerializedName("content")
+        val contentList: MutableList<Content>,
         val createdOn: Date,
         val ind: Int
-) : Document()
+)

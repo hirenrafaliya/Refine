@@ -4,7 +4,7 @@ import org.bson.Document
 
 data class Text(
     val text: String,
-    override val size: Int,
+    val size: Int,
     val color: String,
     val alignment: String,
     val font: String,
@@ -17,4 +17,4 @@ data class Text(
     val paddingEnd: Int,
     val paddingBottom: Int,
     val action:Action
-) :Document()
+)
