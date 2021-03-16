@@ -3,8 +3,8 @@ package com.app.refine.ui
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.app.refine.databinding.ActivitySplashBinding
 import com.app.refine.utils.MongoUtils
@@ -32,21 +32,22 @@ class SplashActivity : AppCompatActivity() {
 
     private fun authenticateUser() {
         if (MongoUtils.getApp().currentUser() == null) {
-            viewmodel.loginAnonymousUser().observe(this, Observer {
+            viewmodel.loginAnonymousUser().observe(this, {
                 when {
                     it != null -> {
                         startActivity(
                             Intent(
                                 this@SplashActivity,
-                                UploadArticleActivity::class.java
+                                ArticleActivity::class.java
                             )
                         )
+                        finish()
                     }
-                    viewmodel.isUserFailedToLogin() -> {
-                        //todo : handel failure
+                    viewmodel.isLoginFailed() -> {
+                        handleFailure()
                     }
                     else -> {
-                        //todo : handle else part same as failure
+                        handleFailure()
                     }
                 }
             })
@@ -55,9 +56,20 @@ class SplashActivity : AppCompatActivity() {
             startActivity(
                 Intent(
                     this@SplashActivity,
-                    UploadArticleActivity::class.java
+                    ArticleActivity::class.java
                 )
             )
+            finish()
+        }
+    }
+
+    private fun handleFailure() {
+        binding.tvStatus.visibility = View.VISIBLE
+        binding.tvStatus.text = "Something went wrong\n${viewmodel.getLoginError()}\nClick to retry"
+
+        binding.tvStatus.setOnClickListener {
+            binding.tvStatus.text="Loading..."
+            authenticateUser()
         }
     }
 

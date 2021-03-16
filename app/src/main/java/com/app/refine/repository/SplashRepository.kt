@@ -10,7 +10,7 @@ class SplashRepository {
 
     private val TAG = "spls_repo_tager"
 
-    var isFailedToLogin = false
+    var loginError = ""
 
     fun loginAnonymousUser(): MutableLiveData<User> {
         val user: MutableLiveData<User> = MutableLiveData()
@@ -20,7 +20,7 @@ class SplashRepository {
                 user.postValue(it.get())
             } else {
                 Log.d(TAG, "loginAnonymousUser: failure : ${it.error}")
-                isFailedToLogin = true
+                loginError = it.error.toString()
             }
         }
         return user

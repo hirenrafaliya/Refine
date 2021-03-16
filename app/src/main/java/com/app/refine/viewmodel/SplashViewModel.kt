@@ -19,7 +19,11 @@ class SplashViewModel : ViewModel() {
         return user
     }
 
-    fun isUserFailedToLogin(): Boolean {
-        return repository.isFailedToLogin
+    fun isLoginFailed(): Boolean {
+        return repository.loginError.isNotBlank()
+    }
+
+    fun getLoginError():String{
+        return repository.loginError
     }
 }

@@ -2,7 +2,9 @@ package com.app.refine.model
 
 import com.google.gson.annotations.SerializedName
 import org.bson.types.ObjectId
+import java.io.Serializable
 import java.util.*
+
 
 data class Article(
         val _id: ObjectId,
@@ -12,4 +14,4 @@ data class Article(
         val contentList: MutableList<Content>,
         val createdOn: Date,
         val ind: Int
-)
+):Serializable

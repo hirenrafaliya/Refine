@@ -7,8 +7,7 @@ import com.app.refine.model.Article
 import com.app.refine.repository.ArticleRepository
 import kotlinx.coroutines.launch
 
-class UploadArticleViewModel : ViewModel() {
-    private val TAG = "uart_vmdl_tager"
+class ArticleViewModel : ViewModel() {
 
     private val repository = ArticleRepository()
     private var articleList = MutableLiveData<MutableList<Article>>()
@@ -20,5 +19,6 @@ class UploadArticleViewModel : ViewModel() {
         return articleList
     }
 
-    fun isFailedToGetArticle():Boolean=repository.getArticleError.isNotBlank()
+    fun isGetArticleFailed(): Boolean = repository.getArticleError.isNotBlank()
+    fun getArticleError(): String = repository.getArticleError
 }
