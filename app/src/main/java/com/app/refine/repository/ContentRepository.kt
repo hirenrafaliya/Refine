@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.app.refine.model.Article
 import com.app.refine.utils.MongoUtils
 import com.google.gson.Gson
-import com.mongodb.client.model.Filters.eq
 import org.bson.Document
 import org.bson.types.ObjectId
 
@@ -18,14 +17,13 @@ class ContentRepository {
         val articleLiveData = MutableLiveData<Article>()
 
         Log.d(TAG, "_id:${article._id}")
-        val query = Document("title", ObjectId(article._id.toHexString()))
+        val query = Document("_id",ObjectId(article._id.id))
         MongoUtils.getDatabase().getCollection("test").findOne(query)
             .getAsync {
                 if (it.isSuccess) {
                     Log.d(TAG, "getArticleContent: success")
                     getArticleContentStatus = "success"
                     val art = Gson().fromJson(it.get().toJson(), Article::class.java)
-                    Log.d(TAG, "getArticleContent: ${it.get().toJson()}")
                     articleLiveData.postValue(art)
                 } else {
                     Log.d(TAG, "getArticleContent: failure ${it.error}")

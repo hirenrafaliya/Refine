@@ -1,13 +1,12 @@
 package com.app.refine.model
 
 import com.google.gson.annotations.SerializedName
-import org.bson.types.ObjectId
 import java.io.Serializable
 import java.util.*
 
 
 data class Article(
-        val _id: ObjectId,
+        val _id: DocId,
         val type: String,
         val display: Display,
         @SerializedName("content")

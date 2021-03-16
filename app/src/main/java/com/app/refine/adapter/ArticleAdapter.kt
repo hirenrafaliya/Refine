@@ -14,6 +14,9 @@ import com.app.refine.ui.ContentActivity
 import com.app.refine.utils.toHtml
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import org.bson.BsonObjectId
+import org.bson.codecs.pojo.annotations.BsonId
+import org.bson.types.ObjectId
 
 class ArticleAdapter(val articleList: MutableList<Article>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -82,5 +85,7 @@ class ArticleAdapter(val articleList: MutableList<Article>) :
             intent.putExtra("article", articleList[position])
             holder.itemView.context.startActivity(intent)
         }
+
+        Log.d(TAG, "onBindArticle toString: ${article._id.toString()}")
     }
 }

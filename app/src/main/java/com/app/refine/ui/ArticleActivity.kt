@@ -1,6 +1,7 @@
 package com.app.refine.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +30,6 @@ class ArticleActivity : AppCompatActivity() {
             )
 
         getArticleList()
-
     }
 
     private fun getArticleList() {

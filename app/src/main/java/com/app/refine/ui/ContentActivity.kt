@@ -2,13 +2,22 @@ package com.app.refine.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.refine.R
+import com.app.refine.adapter.ContentAdapter
 import com.app.refine.databinding.ActivityContentBinding
 import com.app.refine.model.Article
+import com.app.refine.utils.getLoadingAnimation
 import com.app.refine.utils.isFailed
 import com.app.refine.utils.isSuccess
+import com.app.refine.utils.toHtml
 import com.app.refine.viewmodel.ContentViewModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class ContentActivity : AppCompatActivity() {
     private val TAG = "cont_actv_tager"
@@ -29,11 +38,15 @@ class ContentActivity : AppCompatActivity() {
     }
 
     private fun getArticleContent() {
+        binding.imgLoading.visibility = View.VISIBLE
+        binding.imgLoading.startAnimation(getLoadingAnimation(this))
+
         article = intent.getSerializableExtra("article") as Article
 
         viewModel.getArticleContent(article).observe(this, {
             if (viewModel.getArticleContentStatus().isSuccess()) {
-                Log.d(TAG, "getArticleContent: $it")
+                article = it
+                setArticleContent()
             } else if (viewModel.getArticleContentStatus().isFailed()) {
                 handleFailure()
             }
@@ -41,6 +54,57 @@ class ContentActivity : AppCompatActivity() {
     }
 
     private fun handleFailure() {
-        
+        binding.imgLoading.visibility = View.INVISIBLE
+        binding.tvStatus.visibility = View.VISIBLE
+
+        binding.tvStatus.text =
+            "Something went wrong\n${viewModel.getArticleContentStatus()}\nClick to retry"
+
+        binding.tvStatus.setOnClickListener {
+            binding.imgLoading.visibility = View.VISIBLE
+            binding.tvStatus.visibility = View.GONE
+
+            getArticleContent()
+        }
+    }
+
+    private fun setArticleContent() {
+        binding.tvTitle.text = article.display.title.toHtml()
+        binding.tvTitle.isSelected = true
+
+        Log.d(TAG, "setArticleContent: $article")
+
+        Glide
+            .with(this)
+            .load(article.display.img)
+            .placeholder(R.drawable.img_placeholder)
+            .transition(DrawableTransitionOptions.withCrossFade(800))
+            .into(binding.imgDisplayArticle)
+
+        binding.imgBack.setOnClickListener {
+            onBackPressed()
+        }
+
+        initRecyclerView()
+
+    }
+
+    private fun initRecyclerView() {
+        binding.imgLoading.visibility = View.GONE
+        binding.imgLoading.clearAnimation()
+        binding.tvStatus.visibility = View.GONE
+
+
+        binding.recyclerView.apply {
+            adapter = ContentAdapter(article.contentList)
+            layoutManager = LinearLayoutManager(this@ContentActivity)
+        }
+
+        binding.scrollView.startAnimation(
+            AnimationUtils.loadAnimation(
+                this,
+                R.anim.anim_recycler
+            )
+        )
     }
 }

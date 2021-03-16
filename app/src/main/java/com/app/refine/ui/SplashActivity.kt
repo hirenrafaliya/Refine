@@ -75,3 +75,5 @@ class SplashActivity : AppCompatActivity() {
 
 
 }
+
+//todo: set text formatting in item_text
