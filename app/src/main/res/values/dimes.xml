@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="cornerRadius">@dimen/_2sdp</dimen>
+    <dimen name="margin">@dimen/_8sdp</dimen>
 </resources>

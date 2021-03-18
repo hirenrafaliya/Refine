@@ -72,15 +72,6 @@ class ContentActivity : AppCompatActivity() {
         binding.tvTitle.text = article.display.title.toHtml()
         binding.tvTitle.isSelected = true
 
-        Log.d(TAG, "setArticleContent: $article")
-
-        Glide
-            .with(this)
-            .load(article.display.img)
-            .placeholder(R.drawable.img_placeholder)
-            .transition(DrawableTransitionOptions.withCrossFade(800))
-            .into(binding.imgDisplayArticle)
-
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }

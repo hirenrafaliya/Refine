@@ -1,7 +1,5 @@
 package com.app.refine.model
 
-import org.bson.Document
-
 data class Text(
     val text: String,
     val size: Int,
@@ -16,5 +14,8 @@ data class Text(
     val paddingTop: Int,
     val paddingEnd: Int,
     val paddingBottom: Int,
-    val action:Action
+    val width: String,
+    val horizontalBias: Float,
+    val action: Action,
+    val background: Background
 )
