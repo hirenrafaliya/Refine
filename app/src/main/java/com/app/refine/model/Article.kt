@@ -9,8 +9,10 @@ data class Article(
         val _id: DocId,
         val type: String,
         val display: Display,
-        @SerializedName("content")
+        @SerializedName("contents")
         val contentList: MutableList<Content>,
         val createdOn: Date,
         val ind: Int
 ):Serializable
+
+//todo : changed content => contents
