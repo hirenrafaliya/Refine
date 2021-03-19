@@ -1,7 +1,6 @@
 package com.app.refine.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
@@ -16,8 +15,6 @@ import com.app.refine.utils.isFailed
 import com.app.refine.utils.isSuccess
 import com.app.refine.utils.toHtml
 import com.app.refine.viewmodel.ContentViewModel
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class ContentActivity : AppCompatActivity() {
     private val TAG = "cont_actv_tager"

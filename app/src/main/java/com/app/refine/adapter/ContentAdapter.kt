@@ -16,6 +16,7 @@ import com.app.refine.databinding.ItemBlankBinding
 import com.app.refine.databinding.ItemImageBinding
 import com.app.refine.databinding.ItemSpaceBinding
 import com.app.refine.databinding.ItemTextBinding
+import com.app.refine.listener.OnContentItemClickListener
 import com.app.refine.model.Content
 import com.app.refine.utils.*
 import com.bumptech.glide.Glide
@@ -23,7 +24,10 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import top.defaults.drawabletoolbox.DrawableBuilder
 
 
-class ContentAdapter(private val contentList: MutableList<Content>) :
+class ContentAdapter(
+    private val contentList: MutableList<Content>,
+    private val listener: OnContentItemClickListener? = null
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TAG = "cont_adap_tager"
@@ -193,6 +197,12 @@ class ContentAdapter(private val contentList: MutableList<Content>) :
                 }
             }
         }
+
+        if (listener != null) {
+            holder.binding.layoutParent.setOnClickListener {
+                listener.onContentItemClick(position)
+            }
+        }
     }
 
     private fun onBindImage(holder: ImageHolder) {
@@ -248,6 +258,12 @@ class ContentAdapter(private val contentList: MutableList<Content>) :
                 }
             }
         }
+
+        if (listener != null) {
+            holder.binding.layoutParent.setOnClickListener {
+                listener.onContentItemClick(position)
+            }
+        }
     }
 
     private fun onBindSpace(holder: SpaceHolder) {
@@ -259,6 +275,12 @@ class ContentAdapter(private val contentList: MutableList<Content>) :
                 val params = holder.binding.layoutParent.layoutParams
                 params.height = space.height.toSdp(holder.itemView.context).toInt()
                 holder.binding.layoutParent.layoutParams = params
+            }
+        }
+
+        if (listener != null) {
+            holder.binding.layoutParent.setOnClickListener {
+                listener.onContentItemClick(position)
             }
         }
     }
