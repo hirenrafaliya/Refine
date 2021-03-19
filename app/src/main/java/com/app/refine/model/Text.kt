@@ -1,5 +1,7 @@
 package com.app.refine.model
 
+import java.io.Serializable
+
 data class Text(
     var text: String,
     var size: Int,
@@ -18,4 +20,4 @@ data class Text(
     var horizontalBias: Float,
     var action: Action?,
     var background: Background?
-)
+) : Serializable

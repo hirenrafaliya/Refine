@@ -2,7 +2,6 @@ package com.app.refine.model
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
-import java.util.*
 
 
 data class Article(

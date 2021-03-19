@@ -56,7 +56,7 @@ class SplashActivity : AppCompatActivity() {
             startActivity(
                 Intent(
                     this@SplashActivity,
-                    UploadArticleActivity::class.java
+                    ArticleActivity::class.java
                 )
             )
             finish()
