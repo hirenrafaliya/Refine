@@ -17,7 +17,7 @@ class ContentRepository {
         val articleLiveData = MutableLiveData<Article>()
 
         Log.d(TAG, "_id:${article._id}")
-        val query = Document("_id",ObjectId(article._id.id))
+        val query = Document("_id",ObjectId(article._id?.id))
         MongoUtils.getDatabase().getCollection("test").findOne(query)
             .getAsync {
                 if (it.isSuccess) {

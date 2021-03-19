@@ -15,4 +15,16 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="StyleAddTextView" parent="Theme.Refine">
+        <item name="android:textColor">@color/black_text_p</item>
+        <item name="fontFamily">@font/ps_bold</item>
+        <item name="android:textSize">@dimen/_13sdp</item>
+    </style>
+
+    <style name="StyleAddEditText" parent="Theme.Refine">
+        <item name="android:textColor">@color/black_text_s</item>
+        <item name="fontFamily">@font/ps_regular</item>
+        <item name="android:textSize">@dimen/_13sdp</item>
+        <item name="android:padding">@dimen/_6sdp</item>
+    </style>
 </resources>

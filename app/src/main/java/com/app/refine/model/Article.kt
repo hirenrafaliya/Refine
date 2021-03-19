@@ -6,8 +6,8 @@ import java.util.*
 
 
 data class Article(
-        val _id: DocId,
-        val type: String,
+        val _id: DocId?,
+        var type: String,
         val display: Display,
         @SerializedName("contents")
         val contentList: MutableList<Content>,

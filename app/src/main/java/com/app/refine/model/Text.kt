@@ -1,21 +1,21 @@
 package com.app.refine.model
 
 data class Text(
-    val text: String,
-    val size: Int,
-    val color: String,
-    val alignment: String,
-    val font: String,
-    val marginStart: Int,
-    val marginTop: Int,
-    val marginEnd: Int,
-    val marginBottom: Int,
-    val paddingStart: Int,
-    val paddingTop: Int,
-    val paddingEnd: Int,
-    val paddingBottom: Int,
-    val width: String,
-    val horizontalBias: Float,
-    val action: Action,
-    val background: Background
+    var text: String,
+    var size: Int,
+    var color: String,
+    var alignment: String,
+    var font: String,
+    var marginStart: Int,
+    var marginTop: Int,
+    var marginEnd: Int,
+    var marginBottom: Int,
+    var paddingStart: Int,
+    var paddingTop: Int,
+    var paddingEnd: Int,
+    var paddingBottom: Int,
+    var width: String,
+    var horizontalBias: Float,
+    var action: Action?,
+    var background: Background?
 )

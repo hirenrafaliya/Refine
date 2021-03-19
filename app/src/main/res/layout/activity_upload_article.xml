@@ -60,165 +60,302 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvTypeSpace"
+                android:id="@+id/tvTypeDisplay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:background="@drawable/bg_add_text_view"
                 android:fontFamily="@font/ps_bold"
                 android:padding="@dimen/_6sdp"
-                android:text="SPACE"
+                android:text="DISPLAY"
                 android:textColor="@color/blue_p"
                 android:textSize="@dimen/_13sdp"
                 app:layout_constraintStart_toEndOf="@+id/tvTypeImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/tvAddContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:background="@drawable/bg_add_text_view"
+                android:fontFamily="@font/ps_bold"
+                android:padding="@dimen/_6sdp"
+                android:text="ADD"
+                app:layout_constraintHorizontal_bias="1.0"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:textColor="@color/blue_p"
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvTypeDisplay"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:id="@+id/layoutAddText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_12sdp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/tvTypeText">
-
-                <TextView
-                    android:id="@+id/tvLabelTextText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ps_bold"
-                    android:text="Text"
-                    android:textColor="@color/black_text_p"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/edtTextText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_2sdp"
                     android:background="@drawable/bg_add_edit_text"
-                    android:fontFamily="@font/ps_regular"
                     android:inputType="textMultiLine"
-                    android:padding="@dimen/_6sdp"
-                    android:text="Some text for my own article app"
-                    android:textColor="@color/black_text_s"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/tvLabelTextText" />
-
-                <TextView
-                    android:id="@+id/tvLabelTextSize"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/ps_bold"
-                    android:text="Size"
-                    android:textColor="@color/black_text_p"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/edtTextSize"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/edtTextSize" />
+                    android:hint="Text"
+                    android:theme="@style/StyleAddEditText" />
 
                 <EditText
                     android:id="@+id/edtTextSize"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:hint="Size 14"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtTextFont"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:hint="Font regular"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <TextView
+                    android:id="@+id/tvTextFontBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    android:padding="@dimen/_6sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:text="Bold"
+                    android:theme="@style/StyleAddTextView" />
+
+                <TextView
+                    android:id="@+id/tvTextFontRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:padding="@dimen/_6sdp"
+                    android:text="Regular"
+                    android:theme="@style/StyleAddTextView" />
+
+                <EditText
+                    android:id="@+id/edtTextColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:background="@drawable/bg_add_edit_text"
-                    android:fontFamily="@font/ps_regular"
+                    android:hint="Color Black Primary"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <TextView
+                    android:id="@+id/tvTextColorBlackPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:padding="@dimen/_6sdp"
+                    android:text="Black Primary"
+                    android:theme="@style/StyleAddTextView" />
+
+                <TextView
+                    android:id="@+id/tvTextColorBlackSecondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:padding="@dimen/_6sdp"
+                    android:text="Black Secondary"
+                    android:theme="@style/StyleAddTextView" />
+
+                <TextView
+                    android:id="@+id/tvTextColorBluePrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:padding="@dimen/_6sdp"
+                    android:text="Blue Primary"
+                    android:theme="@style/StyleAddTextView" />
+
+                <TextView
+                    android:id="@+id/tvTextColorBlueSecondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:padding="@dimen/_6sdp"
+                    android:text="Blue Secondary"
+                    android:theme="@style/StyleAddTextView" />
+
+                <EditText
+                    android:id="@+id/edtTextMarginStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:hint="marginStart 8"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtTextMarginTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:hint="marginTop 8"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtTextMarginEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:hint="marginEnd 8"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtTextMarginBottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:hint="marginBottom 8"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtTextPaddingStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:hint="paddingStart 0"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtTextPaddingTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:hint="paddingTop 0"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtTextPaddingEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:hint="paddingEnd 0"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtTextPaddingBottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:hint="paddingBottom 0"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutAddImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/tvTypeText">
+
+                <EditText
+                    android:id="@+id/edtImageUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:hint="imageUrl"
                     android:inputType="textMultiLine"
-                    android:paddingStart="@dimen/_12sdp"
-                    android:paddingTop="@dimen/_6sdp"
-                    android:paddingEnd="@dimen/_12sdp"
-                    android:paddingBottom="@dimen/_6sdp"
-                    android:text="4"
-                    android:textColor="@color/black_text_s"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintStart_toEndOf="@+id/tvLabelTextSize"
-                    app:layout_constraintTop_toBottomOf="@+id/edtTextText" />
+                    android:theme="@style/StyleAddEditText" />
 
-                <TextView
-                    android:id="@+id/tvLabelTextWidth"
-                    android:layout_width="0dp"
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutAddDisplay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/tvTypeText">
+
+                <EditText
+                    android:id="@+id/edtDisplayTitle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
                     android:background="@drawable/bg_add_edit_text"
-                    android:fontFamily="@font/ps_bold"
-                    android:padding="@dimen/_6sdp"
-                    android:text="WRAP_CONTENT"
-                    android:textAlignment="center"
-                    android:textColor="@color/black_text_p"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/edtTextSize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/edtTextSize"
-                    app:layout_constraintTop_toTopOf="@+id/edtTextSize" />
+                    android:hint="Title"
+                    android:inputType="textMultiLine"
+                    android:theme="@style/StyleAddEditText" />
 
-                <TextView
-                    android:id="@+id/tvTextColor0"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/edtDisplayDescription"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:background="@drawable/bg_add_edit_text"
-                    android:fontFamily="@font/ps_regular"
-                    android:padding="@dimen/_6sdp"
-                    android:text="Black P"
-                    android:textColor="@color/black_text_p"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toStartOf="@+id/tvTextColor1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edtTextSize" />
+                    android:hint="Description"
+                    android:inputType="textMultiLine"
+                    android:theme="@style/StyleAddEditText" />
 
-                <TextView
-                    android:id="@+id/tvTextColor1"
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/edtDisplayImg"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:background="@drawable/bg_add_edit_text"
-                    android:fontFamily="@font/ps_regular"
-                    android:padding="@dimen/_6sdp"
-                    android:text="Black S"
-                    android:textAlignment="center"
-                    android:textColor="@color/black_text_s"
-                    app:layout_constraintEnd_toStartOf="@+id/tvTextColor2"
-                    app:layout_constraintStart_toEndOf="@+id/tvTextColor0"
-                    app:layout_constraintTop_toBottomOf="@+id/edtTextSize" />
+                    android:hint="imageUrl"
+                    android:inputType="textMultiLine"
+                    android:theme="@style/StyleAddEditText" />
 
-                <TextView
-                    android:id="@+id/tvTextColor2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:background="@drawable/bg_add_edit_text"
-                    android:fontFamily="@font/ps_regular"
-                    android:padding="@dimen/_6sdp"
-                    android:text="Blue P"
-                    android:textColor="@color/blue_p"
-                    android:textAlignment="center"
-                    app:layout_constraintEnd_toStartOf="@+id/tvTextColor3"
-                    app:layout_constraintStart_toEndOf="@+id/tvTextColor1"
-                    app:layout_constraintTop_toBottomOf="@+id/edtTextSize" />
-
-                <TextView
-                    android:id="@+id/tvTextColor3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:background="@drawable/bg_add_edit_text"
-                    android:fontFamily="@font/ps_regular"
-                    android:padding="@dimen/_6sdp"
-                    android:textAlignment="center"
-                    android:text="Blue S"
-                    android:textColor="@color/blue_s"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tvTextColor2"
-                    app:layout_constraintTop_toBottomOf="@+id/edtTextSize" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
