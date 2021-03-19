@@ -160,7 +160,8 @@ class UploadArticleActivity : AppCompatActivity() {
         )
         binding.apply {
             edtTextText.addTextChangedListener {
-                content.text?.text = it.toString()
+                if (it.toString().isNotBlank())
+                    content.text?.text = it.toString()
             }
             edtTextSize.addTextChangedListener {
                 if (it.toString().isNotBlank())
