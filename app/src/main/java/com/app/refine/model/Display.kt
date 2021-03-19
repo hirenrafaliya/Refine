@@ -4,7 +4,7 @@ import org.bson.Document
 import java.io.Serializable
 
 data class Display(
-    val title:String,
-    val description:String,
+    var title:String,
+    var description:String,
     val img:String,
 ):Serializable

@@ -2,6 +2,7 @@ package com.app.refine.adapter
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -72,14 +73,19 @@ class ContentAdapter(private val contentList: MutableList<Content>) :
         }
     }
 
-    override fun getItemCount(): Int = contentList.size
+    override fun getItemCount(): Int {
+        return contentList.size
+    }
 
     override fun getItemViewType(position: Int): Int {
+
         return when (contentList[position].type) {
             ContentType.TEXT -> {
+                Log.d(TAG, "getItemViewType: TEXT $position")
                 TEXT
             }
             ContentType.IMAGE -> {
+                Log.d(TAG, "getItemViewType: IMAGE $position")
                 IMAGE
             }
             ContentType.SPACE -> {

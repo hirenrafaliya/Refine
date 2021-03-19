@@ -12,6 +12,7 @@ import com.app.refine.constant.*
 import com.app.refine.databinding.ActivityUploadArticleBinding
 import com.app.refine.model.*
 import com.app.refine.viewmodel.UploadArticleViewModel
+import com.google.gson.Gson
 import java.util.*
 
 class UploadArticleActivity : AppCompatActivity() {
@@ -50,7 +51,6 @@ class UploadArticleActivity : AppCompatActivity() {
     }
 
     private fun setActions() {
-
         content = Content(
             ContentType.TEXT,
             null,
@@ -83,6 +83,8 @@ class UploadArticleActivity : AppCompatActivity() {
                 layoutAddText.visibility = View.VISIBLE
                 layoutAddImage.visibility = View.INVISIBLE
                 layoutAddDisplay.visibility = View.INVISIBLE
+
+                setLayoutAddDisplay()
             }
 
             tvAddContent.setOnClickListener {
@@ -92,6 +94,22 @@ class UploadArticleActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    private fun addContentToList() {
+        article.contentList.add(content)
+
+        position++
+        binding.apply {
+            layoutAddText.visibility = View.GONE
+            layoutAddImage.visibility = View.GONE
+            layoutAddDisplay.visibility = View.GONE
+        }
+
+        val gson = Gson()
+        gson.serializeNulls()
+        Log.d(TAG, "article: ${gson.toJson(content)}")
+
     }
 
     private fun resetItems() {
@@ -116,19 +134,6 @@ class UploadArticleActivity : AppCompatActivity() {
             edtDisplayDescription.text.clear()
             edtDisplayImg.text.clear()
         }
-
-    }
-
-    private fun addContentToList() {
-        article.contentList.add(content)
-
-        binding.apply {
-            layoutAddText.visibility = View.GONE
-            layoutAddImage.visibility = View.GONE
-            layoutAddDisplay.visibility = View.GONE
-        }
-
-        Log.d(TAG, "article: $article")
 
     }
 
@@ -168,10 +173,12 @@ class UploadArticleActivity : AppCompatActivity() {
                     content.text?.size = it.toString().toInt()
             }
             edtTextFont.addTextChangedListener {
-                content.text?.font = it.toString()
+                if (it.toString().isNotBlank())
+                    content.text?.font = it.toString()
             }
             edtTextColor.addTextChangedListener {
-                content.text?.color = it.toString()
+                if (it.toString().isNotBlank())
+                    content.text?.color = it.toString()
             }
 
             edtTextMarginStart.addTextChangedListener {
@@ -233,15 +240,39 @@ class UploadArticleActivity : AppCompatActivity() {
 
     private fun setLayoutAddImage() {
         content = Content(
-            ContentType.TEXT,
+            ContentType.IMAGE,
             null,
             Image("", null),
             null
         )
         binding.apply {
             edtImageUrl.addTextChangedListener {
-                content.image?.url = it.toString()
+                if (it.toString().isNotBlank())
+                    content.image?.url = it.toString()
             }
         }
+    }
+
+    private fun setLayoutAddDisplay() {
+        binding.apply {
+            edtDisplayTitle.addTextChangedListener {
+                if (it.toString().isNotBlank())
+                    article.display.title = it.toString()
+            }
+            edtDisplayDescription.addTextChangedListener {
+                if (it.toString().isNotBlank())
+                    article.display.description = it.toString()
+            }
+            edtImageUrl.addTextChangedListener {
+                if (it.toString().isNotBlank())
+                    article.display.description = it.toString()
+            }
+        }
+    }
+
+    private val contentList = mutableListOf<Content>()
+    private var position = 0
+    fun getCurrentContent(): Content {
+        return contentList[position]
     }
 }
