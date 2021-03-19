@@ -51,12 +51,7 @@ class UploadArticleActivity : AppCompatActivity() {
     }
 
     private fun setActions() {
-        content = Content(
-            ContentType.TEXT,
-            null,
-            null,
-            null
-        )
+        contentList.add(Content("BLANK", null, null, null))
 
         binding.apply {
             tvTypeText.setOnClickListener {
@@ -64,7 +59,7 @@ class UploadArticleActivity : AppCompatActivity() {
                 layoutAddImage.visibility = View.INVISIBLE
                 layoutAddDisplay.visibility = View.INVISIBLE
 
-                content.type = ContentType.TEXT
+                contentList[position].type = ContentType.TEXT
 
                 setLayoutAddText()
             }
@@ -74,7 +69,7 @@ class UploadArticleActivity : AppCompatActivity() {
                 layoutAddImage.visibility = View.VISIBLE
                 layoutAddDisplay.visibility = View.INVISIBLE
 
-                content.type = ContentType.IMAGE
+                contentList[position].type = ContentType.IMAGE
 
                 setLayoutAddImage()
             }
@@ -97,9 +92,10 @@ class UploadArticleActivity : AppCompatActivity() {
     }
 
     private fun addContentToList() {
-        article.contentList.add(content)
+        article.contentList.add(contentList[position])
 
         position++
+        contentList.add(Content("BLANK", null, null, null))
         binding.apply {
             layoutAddText.visibility = View.GONE
             layoutAddImage.visibility = View.GONE
@@ -108,7 +104,7 @@ class UploadArticleActivity : AppCompatActivity() {
 
         val gson = Gson()
         gson.serializeNulls()
-        Log.d(TAG, "article: ${gson.toJson(content)}")
+        Log.d(TAG, "article: ${gson.toJson(contentList[position])}")
 
     }
 
@@ -139,7 +135,7 @@ class UploadArticleActivity : AppCompatActivity() {
 
     private fun setLayoutAddText() {
 
-        content = Content(
+        contentList[position] = Content(
             ContentType.TEXT,
             Text(
                 "",
@@ -166,53 +162,53 @@ class UploadArticleActivity : AppCompatActivity() {
         binding.apply {
             edtTextText.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.text = it.toString()
+                    contentList[position].text?.text = it.toString()
             }
             edtTextSize.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.size = it.toString().toInt()
+                    contentList[position].text?.size = it.toString().toInt()
             }
             edtTextFont.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.font = it.toString()
+                    contentList[position].text?.font = it.toString()
             }
             edtTextColor.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.color = it.toString()
+                    contentList[position].text?.color = it.toString()
             }
 
             edtTextMarginStart.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.marginStart = it.toString().toInt()
+                    contentList[position].text?.marginStart = it.toString().toInt()
             }
             edtTextMarginTop.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.marginTop = it.toString().toInt()
+                    contentList[position].text?.marginTop = it.toString().toInt()
             }
             edtTextMarginEnd.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.marginEnd = it.toString().toInt()
+                    contentList[position].text?.marginEnd = it.toString().toInt()
             }
             edtTextMarginBottom.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.marginBottom = it.toString().toInt()
+                    contentList[position].text?.marginBottom = it.toString().toInt()
             }
 
             edtTextPaddingStart.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.paddingStart = it.toString().toInt()
+                    contentList[position].text?.paddingStart = it.toString().toInt()
             }
             edtTextPaddingTop.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.paddingTop = it.toString().toInt()
+                    contentList[position].text?.paddingTop = it.toString().toInt()
             }
             edtTextPaddingEnd.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.paddingEnd = it.toString().toInt()
+                    contentList[position].text?.paddingEnd = it.toString().toInt()
             }
             edtTextPaddingBottom.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.text?.paddingBottom = it.toString().toInt()
+                    contentList[position].text?.paddingBottom = it.toString().toInt()
             }
 
             tvTextFontBold.setOnClickListener {
@@ -239,7 +235,7 @@ class UploadArticleActivity : AppCompatActivity() {
     }
 
     private fun setLayoutAddImage() {
-        content = Content(
+        contentList[position] = Content(
             ContentType.IMAGE,
             null,
             Image("", null),
@@ -248,7 +244,7 @@ class UploadArticleActivity : AppCompatActivity() {
         binding.apply {
             edtImageUrl.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    content.image?.url = it.toString()
+                    contentList[position].image?.url = it.toString()
             }
         }
     }
