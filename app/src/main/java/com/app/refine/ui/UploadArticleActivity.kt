@@ -12,7 +12,6 @@ import com.app.refine.constant.*
 import com.app.refine.databinding.ActivityUploadArticleBinding
 import com.app.refine.model.*
 import com.app.refine.viewmodel.UploadArticleViewModel
-import com.google.gson.Gson
 import java.util.*
 
 class UploadArticleActivity : AppCompatActivity() {
@@ -129,9 +128,7 @@ class UploadArticleActivity : AppCompatActivity() {
             layoutAddDisplay.visibility = View.GONE
         }
 
-        val gson=Gson()
-        gson.serializeNulls()
-        Log.d(TAG, "article: ${gson.toJson(article)}")
+        Log.d(TAG, "article: $article")
 
     }
 
