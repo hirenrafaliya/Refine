@@ -3,6 +3,7 @@ package com.app.refine.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +12,8 @@ import com.app.refine.adapter.ContentAdapter
 import com.app.refine.constant.*
 import com.app.refine.databinding.ActivityUploadArticleBinding
 import com.app.refine.model.*
+import com.app.refine.repository.UploadRepository
+import com.app.refine.utils.Utils
 import com.app.refine.viewmodel.UploadArticleViewModel
 import com.google.gson.Gson
 import java.util.*
@@ -36,11 +39,26 @@ class UploadArticleActivity : AppCompatActivity() {
         initArticle()
         initRecyclerView(article.contentList)
         setActions()
+        setUploadArticle()
+    }
+
+    private fun setUploadArticle() {
+        binding.tvUpload.setOnClickListener {
+            Toast.makeText(this@UploadArticleActivity, "uploading...", Toast.LENGTH_SHORT).show()
+            UploadRepository().uploadArticle(article)
+        }
     }
 
     private fun initArticle() {
         article =
-            Article(null, ArticleType.ARTICLE, Display("", "", ""), mutableListOf(), Date(), 0)
+            Article(
+                null,
+                ArticleType.ARTICLE,
+                Display("", "", ""),
+                mutableListOf(),
+                0,
+                Metadata(Utils.getCurrentDate())
+            )
     }
 
     private fun initRecyclerView(contentList: MutableList<Content>) {
@@ -104,8 +122,7 @@ class UploadArticleActivity : AppCompatActivity() {
 
         val gson = Gson()
         gson.serializeNulls()
-        Log.d(TAG, "article: ${gson.toJson(contentList[position])}")
-
+        Log.d(TAG, "article: ${gson.toJson(contentList[position - 1])}")
     }
 
     private fun resetItems() {
@@ -125,10 +142,6 @@ class UploadArticleActivity : AppCompatActivity() {
             edtTextPaddingBottom.text.clear()
 
             edtImageUrl.text.clear()
-
-            edtDisplayTitle.text.clear()
-            edtDisplayDescription.text.clear()
-            edtDisplayImg.text.clear()
         }
 
     }
@@ -238,7 +251,7 @@ class UploadArticleActivity : AppCompatActivity() {
         contentList[position] = Content(
             ContentType.IMAGE,
             null,
-            Image("", null),
+            Image("", 8, 8, 8, 8, 2, 8, null),
             null
         )
         binding.apply {
@@ -246,7 +259,41 @@ class UploadArticleActivity : AppCompatActivity() {
                 if (it.toString().isNotBlank())
                     contentList[position].image?.url = it.toString()
             }
+
+            edtImageCornerRadius.addTextChangedListener {
+                if (it.toString().isNotBlank())
+                    contentList[position].image?.cornerRadius = it.toString().toInt()
+            }
+
+            edtImageElevation.addTextChangedListener {
+                if (it.toString().isNotBlank())
+                    contentList[position].image?.elevation = it.toString().toInt()
+            }
+
+            edtImageMarginBottom.addTextChangedListener {
+                if (it.toString().isNotBlank())
+                    contentList[position].image?.marginBottom = it.toString().toInt()
+            }
+
+            edtImageMarginStart.addTextChangedListener {
+                if (it.toString().isNotBlank())
+                    contentList[position].image?.marginStart = it.toString().toInt()
+            }
+            edtImageMarginTop.addTextChangedListener {
+                if (it.toString().isNotBlank())
+                    contentList[position].image?.marginTop = it.toString().toInt()
+            }
+            edtImageMarginEnd.addTextChangedListener {
+                if (it.toString().isNotBlank())
+                    contentList[position].image?.marginEnd = it.toString().toInt()
+            }
+            edtImageMarginBottom.addTextChangedListener {
+                if (it.toString().isNotBlank())
+                    contentList[position].image?.marginBottom = it.toString().toInt()
+            }
         }
+
+
     }
 
     private fun setLayoutAddDisplay() {

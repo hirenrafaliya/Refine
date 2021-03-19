@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.UploadArticleActivity">
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,6 +18,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/layoutAdd"
         app:layout_constraintVertical_weight="2" />
+
+    <TextView
+        android:id="@+id/tvUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:background="@drawable/bg_add_text_view"
+        android:fontFamily="@font/ps_bold"
+        android:padding="@dimen/_6sdp"
+        android:text="UPLOAD"
+        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:textColor="@color/blue_p"
+        android:textSize="@dimen/_13sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.core.widget.NestedScrollView
@@ -161,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:background="@drawable/bg_add_edit_text"
-                    android:hint="Color Black Primary"
+                    android:hint="Color Black Secondary"
                     android:enabled="false"
                     android:inputType="number"
                     android:theme="@style/StyleAddEditText" />
@@ -300,6 +318,8 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:paddingBottom="@dimen/_12sdp"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/tvTypeText">
@@ -311,6 +331,66 @@
                     android:background="@drawable/bg_add_edit_text"
                     android:hint="imageUrl"
                     android:inputType="textMultiLine"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtImageCornerRadius"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:hint="Corner 2 sdp"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtImageElevation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:hint="Elevation 8 sdp"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtImageMarginStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:hint="MarginStart 8 sdp"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtImageMarginTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:hint="MarginTop 8 sdp"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtImageMarginEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:hint="MarginEnd 8 sdp"
+                    android:inputType="number"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
+                    android:id="@+id/edtImageMarginBottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:hint="MarginBottom 8 sdp"
+                    android:inputType="number"
                     android:theme="@style/StyleAddEditText" />
 
             </LinearLayout>

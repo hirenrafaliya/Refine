@@ -11,8 +11,8 @@ data class Article(
         val display: Display,
         @SerializedName("contents")
         val contentList: MutableList<Content>,
-        val createdOn: Date,
-        val ind: Int
+        val ind: Int,
+        val metadata: Metadata
 ):Serializable
 
 //todo : changed content => contents

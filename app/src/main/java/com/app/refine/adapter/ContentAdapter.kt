@@ -2,7 +2,6 @@ package com.app.refine.adapter
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -81,11 +80,9 @@ class ContentAdapter(private val contentList: MutableList<Content>) :
 
         return when (contentList[position].type) {
             ContentType.TEXT -> {
-                Log.d(TAG, "getItemViewType: TEXT $position")
                 TEXT
             }
             ContentType.IMAGE -> {
-                Log.d(TAG, "getItemViewType: IMAGE $position")
                 IMAGE
             }
             ContentType.SPACE -> {
@@ -201,6 +198,7 @@ class ContentAdapter(private val contentList: MutableList<Content>) :
     private fun onBindImage(holder: ImageHolder) {
         val position = holder.layoutPosition
         val image = contentList[position].image
+        val context = holder.itemView.context
 
         if (image != null) {
             if (image.url != null)
@@ -209,6 +207,25 @@ class ContentAdapter(private val contentList: MutableList<Content>) :
                     .placeholder(R.drawable.img_placeholder)
                     .transition(DrawableTransitionOptions.withCrossFade(800))
                     .into(holder.binding.img)
+
+            if (image.marginStart != null && image.marginTop != null && image.marginEnd != null && image.marginBottom != null) {
+                val marginParams = holder.binding.img.layoutParams as ViewGroup.MarginLayoutParams
+                marginParams.setMargins(
+                    image.marginStart.toSdp(context).toInt(),
+                    image.marginTop.toSdp(context).toInt(),
+                    image.marginEnd.toSdp(context).toInt(),
+                    image.marginBottom.toSdp(context).toInt()
+                )
+                holder.binding.img.layoutParams = marginParams
+            }
+
+            if (image.cornerRadius != 0) {
+                holder.binding.img.setCornerRadius(image.cornerRadius.toSdp(context).toInt())
+            }
+
+            if (image.elevation != 0) {
+                holder.binding.img.elevation = image.elevation.toFloat()
+            }
 
             if (image.action != null) {
                 if (image.action.type == ActionType.BROWSE) {
