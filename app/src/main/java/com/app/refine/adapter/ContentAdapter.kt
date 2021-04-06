@@ -1,10 +1,13 @@
 package com.app.refine.adapter
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +23,11 @@ import com.app.refine.listener.OnContentItemClickListener
 import com.app.refine.model.Content
 import com.app.refine.utils.*
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import top.defaults.drawabletoolbox.DrawableBuilder
 
 
@@ -209,6 +216,7 @@ class ContentAdapter(
         val position = holder.layoutPosition
         val image = contentList[position].image
         val context = holder.itemView.context
+
 
         if (image != null) {
             if (image.url != null)

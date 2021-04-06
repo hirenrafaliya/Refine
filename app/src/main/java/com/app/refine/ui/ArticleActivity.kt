@@ -56,6 +56,9 @@ class ArticleActivity : AppCompatActivity() {
         binding.imgLoading.clearAnimation()
         binding.tvStatus.visibility = View.GONE
 
+        articleList.shuffle()
+        //todo : remove shuffle
+        
         binding.recyclerView.apply {
             adapter = ArticleAdapter(articleList)
             layoutManager = LinearLayoutManager(this@ArticleActivity)
