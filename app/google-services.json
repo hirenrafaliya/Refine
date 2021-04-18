@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "630778909236",
+    "project_id": "refine-bdce3",
+    "storage_bucket": "refine-bdce3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630778909236:android:2913c2ef608aff0f79f061",
+        "android_client_info": {
+          "package_name": "com.app.refine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630778909236-d47dttsrpps2i04hvj2s9jbblur6dnmh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNple0TM0ol_3_Fik1wc0_-hAkcwvWBmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "630778909236-d47dttsrpps2i04hvj2s9jbblur6dnmh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
