@@ -22,4 +22,7 @@
 
     <color name="blue_p">#0055FF</color>
     <color name="blue_s">#4869E0</color>
+
+    <color name="red_p">#E53935</color>
+    <color name="red_s">#F4605C</color>
 </resources>

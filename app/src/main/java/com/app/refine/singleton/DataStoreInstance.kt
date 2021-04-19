@@ -37,4 +37,26 @@ object DataStoreInstance {
         val preferences = dataStore.data.first()
         return preferences[preferencesKey(key)] ?: false
     }
+
+    suspend fun setLong(key: String, value: Long) {
+        dataStore.edit {
+            it[preferencesKey<Long>(key)] = value
+        }
+    }
+
+    suspend fun getLong(key: String): Int {
+        val preferences = dataStore.data.first()
+        return preferences[preferencesKey(key)] ?: 0
+    }
+
+    suspend fun setInt(key: String, value: Int) {
+        dataStore.edit {
+            it[preferencesKey<Int>(key)] = value
+        }
+    }
+
+    suspend fun getInt(key: String): Int {
+        val preferences = dataStore.data.first()
+        return preferences[preferencesKey(key)] ?: 0
+    }
 }

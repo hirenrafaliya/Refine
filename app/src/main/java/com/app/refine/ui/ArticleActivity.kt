@@ -7,12 +7,20 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.refine.BuildConfig
 import com.app.refine.R
 import com.app.refine.adapter.ArticleAdapter
+import com.app.refine.custom.IosDialog
 import com.app.refine.databinding.ActivityArticleBinding
 import com.app.refine.model.Article
+import com.app.refine.model.Update
+import com.app.refine.singleton.DataStoreInstance
 import com.app.refine.utils.getLoadingAnimation
 import com.app.refine.viewmodel.ArticleViewModel
+import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ArticleActivity : AppCompatActivity() {
     private val TAG = "artc_actv_tager"
@@ -30,6 +38,7 @@ class ArticleActivity : AppCompatActivity() {
             )
 
         getArticleList()
+        checkForUpdates()
     }
 
     private fun getArticleList() {
@@ -58,7 +67,7 @@ class ArticleActivity : AppCompatActivity() {
 
         articleList.shuffle()
         //todo : remove shuffle
-        
+
         binding.recyclerView.apply {
             adapter = ArticleAdapter(articleList)
             layoutManager = LinearLayoutManager(this@ArticleActivity)
@@ -84,6 +93,38 @@ class ArticleActivity : AppCompatActivity() {
             binding.tvStatus.visibility = View.GONE
 
             getArticleList()
+        }
+    }
+
+    private fun checkForUpdates() {
+        GlobalScope.launch(Dispatchers.IO) {
+            val update = Gson().fromJson(DataStoreInstance.getString("update"), Update::class.java)
+
+            Log.d(TAG, "checkForUpdates: ${update.latestVersion} ${update.isShow}")
+
+            if (update.isShow) {
+                val lVersion = update.latestVersion.replace(".", "").toInt()
+                val cVersion = BuildConfig.VERSION_NAME.replace(".", "").toInt()
+                //todo: change cVersion from BuildConfig bc it returns same value on different version
+
+                Log.d(TAG, "checkForUpdates: $lVersion $cVersion")
+
+                if (cVersion < lVersion) {
+                    Log.d(TAG, "checkForUpdates : cVersion < lVersion")
+                    val dialog = IosDialog(this@ArticleActivity, binding.layoutContainer)
+                    dialog.setData(update.dialogTitle, update.dialogDesc, "Update", "Later")
+                    if (update.isForceShow) {
+                        dialog.hideSecondaryBtn()
+                    }
+                    dialog.setIsCancelable(!update.isForceShow)
+                    dialog.show()
+
+                    dialog.setPrimaryBtnOnClickListener {
+                        Log.d(TAG, "checkForUpdates: Update click()")
+                        //todo:open app page on play store
+                    }
+                }
+            }
         }
     }
 }

@@ -1,11 +1,19 @@
 package com.app.refine.viewmodel
 
-import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.FirebaseFirestore
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.app.refine.repository.ConfigRepository
+import kotlinx.coroutines.launch
 
-class ConfigViewModel : ViewModel() {
+class ConfigViewModel(application: Application) : AndroidViewModel(application) {
 
-    fun getConfigData(){
-//        FirebaseFirestore.getInstance().collection("configs").whereGreaterThan()
+    val repository = ConfigRepository()
+
+    fun setConfigData() {
+        viewModelScope.launch {
+            repository.setConfigData()
+        }
     }
+
 }
