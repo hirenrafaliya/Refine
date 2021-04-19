@@ -2,6 +2,11 @@ package com.app.refine.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.app.refine.model.Config.interContent
+import com.app.refine.model.Config.interExit
+import com.app.refine.model.Config.update
+import com.app.refine.model.InterContent
+import com.app.refine.model.InterExit
 import com.app.refine.model.Update
 import com.app.refine.singleton.DataStoreInstance
 import com.google.firebase.firestore.FirebaseFirestore
@@ -11,6 +16,14 @@ import kotlinx.coroutines.tasks.await
 class ConfigRepository {
     private val TAG = "conf_repo_tager"
     var isSetConfigLiveData = MutableLiveData<Boolean>()
+
+    suspend fun setConfigDataFromDataStore() {
+        val gson = Gson()
+        update = gson.fromJson(DataStoreInstance.getString("update"), Update::class.java)
+        interContent =
+            gson.fromJson(DataStoreInstance.getString("update"), InterContent::class.java)
+        interExit = gson.fromJson(DataStoreInstance.getString("update"), InterExit::class.java)
+    }
 
     suspend fun setConfigData() {
         Log.d(TAG, "setConfigData: ")
@@ -30,11 +43,19 @@ class ConfigRepository {
                 Log.d(TAG, "setConfigData: ${snapshot.id}")
                 when (snapshot.id) {
                     "update" -> {
-                        val update = snapshot.toObject(Update::class.java)
-                        Log.d(TAG, "setConfigData: ${Gson().toJson(update)}")
-                        Log.d(TAG, "setConfigData: ${update.toString()}")
+                        update = snapshot.toObject(Update::class.java)!!
                         DataStoreInstance.setString("update", Gson().toJson(update))
-                        DataStoreInstance.setString("updatedOn", update?.updatedOn ?: "0")
+                        DataStoreInstance.setString("updatedOn", update.updatedOn ?: "0")
+                    }
+                    "interContent" -> {
+                        interContent = snapshot.toObject(InterContent::class.java)!!
+                        DataStoreInstance.setString("interContent", Gson().toJson(interContent))
+                        DataStoreInstance.setString("updatedOn", interContent.updatedOn ?: "0")
+                    }
+                    "interExit" -> {
+                        interExit = snapshot.toObject(InterExit::class.java)!!
+                        DataStoreInstance.setString("interExit", Gson().toJson(interExit))
+                        DataStoreInstance.setString("updatedOn", interExit.updatedOn ?: "0")
                     }
                 }
             }

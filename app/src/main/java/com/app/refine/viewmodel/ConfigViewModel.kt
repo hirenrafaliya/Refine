@@ -16,4 +16,10 @@ class ConfigViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    fun setConfigDataFromDataStore() {
+        viewModelScope.launch {
+            repository.setConfigDataFromDataStore()
+        }
+    }
+
 }

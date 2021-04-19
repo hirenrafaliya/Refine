@@ -24,6 +24,8 @@ class RefineApp : Application() {
     private fun setConfigs() {
         val configViewModel = ConfigViewModel(this)
 
+        configViewModel.setConfigDataFromDataStore()
         configViewModel.setConfigData()
+
     }
 }
