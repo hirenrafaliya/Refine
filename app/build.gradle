@@ -79,5 +79,6 @@ dependencies {
     implementation 'me.everything:overscroll-decor-android:1.1.0'
 
     implementation "androidx.datastore:datastore-preferences:1.0.0-alpha01"
+    implementation 'com.factor:bouncy:1.8'
 
 }

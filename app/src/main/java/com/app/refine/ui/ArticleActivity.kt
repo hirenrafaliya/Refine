@@ -1,7 +1,8 @@
 package com.app.refine.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+
 class ArticleActivity : AppCompatActivity() {
     private val TAG = "artc_actv_tager"
 
@@ -39,6 +41,7 @@ class ArticleActivity : AppCompatActivity() {
 
         getArticleList()
         checkForUpdates()
+        binding.toolbar.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_toolbar))
     }
 
     private fun getArticleList() {
@@ -98,30 +101,34 @@ class ArticleActivity : AppCompatActivity() {
 
     private fun checkForUpdates() {
         GlobalScope.launch(Dispatchers.IO) {
+
             val update = Gson().fromJson(DataStoreInstance.getString("update"), Update::class.java)
 
-            Log.d(TAG, "checkForUpdates: ${update.latestVersion} ${update.isShow}")
 
             if (update.isShow) {
                 val lVersion = update.latestVersion.replace(".", "").toInt()
                 val cVersion = BuildConfig.VERSION_NAME.replace(".", "").toInt()
                 //todo: change cVersion from BuildConfig bc it returns same value on different version
 
-                Log.d(TAG, "checkForUpdates: $lVersion $cVersion")
 
                 if (cVersion < lVersion) {
-                    Log.d(TAG, "checkForUpdates : cVersion < lVersion")
-                    val dialog = IosDialog(this@ArticleActivity, binding.layoutContainer)
-                    dialog.setData(update.dialogTitle, update.dialogDesc, "Update", "Later")
-                    if (update.isForceShow) {
-                        dialog.hideSecondaryBtn()
-                    }
-                    dialog.setIsCancelable(!update.isForceShow)
-                    dialog.show()
+                    launch(Dispatchers.Main) {
+                        val dialog = IosDialog(this@ArticleActivity, binding.layoutContainer)
+                        dialog.setData(update.dialogTitle, update.dialogDesc, "Update", "Later")
+                        if (update.isForceShow) {
+                            dialog.hideSecondaryBtn()
+                        }
+                        dialog.setIsCancelable(!update.isForceShow)
+                        dialog.show()
 
-                    dialog.setPrimaryBtnOnClickListener {
-                        Log.d(TAG, "checkForUpdates: Update click()")
-                        //todo:open app page on play store
+                        dialog.setPrimaryBtnOnClickListener {
+                            startActivity(
+                                Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse("market://details?id=${BuildConfig.APPLICATION_ID}")
+                                )
+                            )
+                        }
                     }
                 }
             }

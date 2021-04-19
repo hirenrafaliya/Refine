@@ -10,7 +10,7 @@
         android:roundIcon="@drawable/ic_circle"
         android:supportsRtl="true"
         android:theme="@style/Theme.Refine">
-        <activity android:name=".ui.ContentActivity"></activity>
+        <activity android:name=".ui.ContentActivity" />
         <activity android:name=".ui.ArticleActivity" />
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
@@ -19,20 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.UploadArticleActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ui.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.UploadArticleActivity" />
+        <activity android:name=".ui.MainActivity" />
     </application>
 
 </manifest>
