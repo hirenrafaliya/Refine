@@ -7,6 +7,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.app.refine.R
 import com.app.refine.listener.OnInterAdListener
+import com.app.refine.model.Config
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
@@ -21,7 +22,7 @@ class InterAd(val context: Context) : OnInterAdListener {
     private var isFailedToLoad = false
 
     override fun reInitInterstitialAd() {
-        Log.d(TAG, "reInitInterstitialAd: ")
+        Log.d(TAG, "reInitInterstitialAd: ${Config.interExit.toString()}")
 
         if (interstitialAd.value == null && !isLoading)
             initializeInterstitialAd()

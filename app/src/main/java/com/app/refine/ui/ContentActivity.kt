@@ -10,10 +10,7 @@ import com.app.refine.R
 import com.app.refine.adapter.ContentAdapter
 import com.app.refine.databinding.ActivityContentBinding
 import com.app.refine.model.Article
-import com.app.refine.utils.getLoadingAnimation
-import com.app.refine.utils.isFailed
-import com.app.refine.utils.isSuccess
-import com.app.refine.utils.toHtml
+import com.app.refine.utils.*
 import com.app.refine.viewmodel.ContentViewModel
 
 class ContentActivity : AppCompatActivity() {
@@ -30,6 +27,7 @@ class ContentActivity : AppCompatActivity() {
             ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
                 ContentViewModel::class.java
             )
+        RefineApp.onInterAdListener.reInitInterstitialAd()
 
         getArticleContent()
     }
@@ -94,5 +92,12 @@ class ContentActivity : AppCompatActivity() {
                 R.anim.anim_recycler
             )
         )
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (AdUtils.reqInterContentCount()) {
+            RefineApp.onInterAdListener.showInterstitialAd(this)
+        }
     }
 }

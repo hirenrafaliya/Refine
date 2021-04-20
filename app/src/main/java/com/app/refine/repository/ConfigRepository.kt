@@ -10,6 +10,7 @@ import com.app.refine.model.InterExit
 import com.app.refine.model.Update
 import com.app.refine.singleton.DataStoreInstance
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.gson.Gson
 import kotlinx.coroutines.tasks.await
 
@@ -19,10 +20,15 @@ class ConfigRepository {
 
     suspend fun setConfigDataFromDataStore() {
         val gson = Gson()
-        update = gson.fromJson(DataStoreInstance.getString("update"), Update::class.java)
+        val up = DataStoreInstance.getString("update")
+        val ic = DataStoreInstance.getString("interContent")
+        val ie = DataStoreInstance.getString("interExit")
+
+        update = if (up != "null") gson.fromJson(up, Update::class.java) else Update()
         interContent =
-            gson.fromJson(DataStoreInstance.getString("update"), InterContent::class.java)
-        interExit = gson.fromJson(DataStoreInstance.getString("update"), InterExit::class.java)
+            if (ic != "null") gson.fromJson(ic, InterContent::class.java) else InterContent()
+        interExit = if (ie != "null") gson.fromJson(ie, InterExit::class.java) else InterExit()
+
     }
 
     suspend fun setConfigData() {
@@ -35,6 +41,7 @@ class ConfigRepository {
             .getInstance()
             .collection("configs")
             .whereGreaterThan("updatedOn", updatedOn)
+            .orderBy("updatedOn", Query.Direction.ASCENDING)
             .get().await()
 
         if (!querySnapshot.isEmpty) {

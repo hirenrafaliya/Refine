@@ -3,6 +3,7 @@ package com.app.refine.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.app.refine.adapter.ArticleAdapter
 import com.app.refine.custom.IosDialog
 import com.app.refine.databinding.ActivityArticleBinding
 import com.app.refine.model.Article
+import com.app.refine.model.Config.update
 import com.app.refine.model.Update
 import com.app.refine.singleton.DataStoreInstance
 import com.app.refine.utils.getLoadingAnimation
@@ -38,7 +40,6 @@ class ArticleActivity : AppCompatActivity() {
             ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
                 ArticleViewModel::class.java
             )
-        RefineApp.onInterAdListener.reInitInterstitialAd()
         getArticleList()
         checkForUpdates()
         binding.toolbar.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_toolbar))
@@ -99,11 +100,14 @@ class ArticleActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("inad_cstm_tager", "onResume: ")
+        RefineApp.onInterAdListener.reInitInterstitialAd()
+    }
+
     private fun checkForUpdates() {
         GlobalScope.launch(Dispatchers.IO) {
-
-            val update = Gson().fromJson(DataStoreInstance.getString("update"), Update::class.java)
-
 
             if (update.isShow) {
                 val lVersion = update.latestVersion.replace(".", "").toInt()
