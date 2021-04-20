@@ -1,5 +1,6 @@
 package com.app.refine.utils
 
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,6 +16,20 @@ object Utils {
         val dateFormat = SimpleDateFormat(format, Locale.ENGLISH)
         dateFormat.timeZone = TimeZone.getTimeZone("UTC")
         return dateFormat.format(Date())
+    }
+
+    fun logRemote(map: HashMap<String, String>) {
+        val userId = MongoUtils.getApp().currentUser()?.deviceId
+        val date = getCurrentDate()
+
+        map["userId"] = userId ?: "null"
+        map["date"] = date
+
+        FirebaseFirestore
+            .getInstance()
+            .collection("logs")
+            .add(map)
+
     }
 
 }

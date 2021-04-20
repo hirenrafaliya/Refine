@@ -5,6 +5,7 @@ import com.app.refine.R
 import com.app.refine.custom.InterAd
 import com.app.refine.listener.OnInterAdListener
 import com.app.refine.singleton.DataStoreInstance
+import com.app.refine.utils.Utils
 import com.app.refine.viewmodel.ConfigViewModel
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
@@ -15,6 +16,7 @@ class RefineApp : Application() {
 
     companion object {
         lateinit var onInterAdListener: OnInterAdListener
+        val startTime = System.currentTimeMillis()
     }
 
     override fun onCreate() {
@@ -22,6 +24,7 @@ class RefineApp : Application() {
 
         init()
         setConfigs()
+        setRemoteLogs()
 
     }
 
@@ -42,6 +45,10 @@ class RefineApp : Application() {
 
         configViewModel.setConfigDataFromDataStore()
         configViewModel.setConfigData()
+    }
+
+    private fun setRemoteLogs() {
+        Utils.logRemote(hashMapOf(Pair("msg", "App open"), Pair("tag", "app")))
     }
 
 

@@ -18,6 +18,7 @@ class ContentActivity : AppCompatActivity() {
     private lateinit var viewModel: ContentViewModel
     private lateinit var binding: ActivityContentBinding
     private lateinit var article: Article
+    private val startTime = System.currentTimeMillis()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,14 @@ class ContentActivity : AppCompatActivity() {
         binding.imgLoading.startAnimation(getLoadingAnimation(this))
 
         article = intent.getSerializableExtra("article") as Article
+
+        Utils.logRemote(
+            hashMapOf(
+                Pair("msg", "Article open"),
+                Pair("articleId", article._id?.id ?: "null"),
+                Pair("tag", "article")
+            )
+        )
 
         viewModel.getArticleContent(article).observe(this, {
             if (viewModel.getArticleContentStatus().isSuccess()) {
@@ -96,6 +105,16 @@ class ContentActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+
+        Utils.logRemote(
+            hashMapOf(
+                Pair("msg", "Article exit"),
+                Pair("articleId", article._id?.id ?: "null"),
+                Pair("tag", "article"),
+                Pair("duration", ((System.currentTimeMillis() - startTime) / 1000).toString())
+            )
+        )
+
         if (AdUtils.reqInterContent()) {
             RefineApp.onInterAdListener.showInterstitialAd(this)
         }
