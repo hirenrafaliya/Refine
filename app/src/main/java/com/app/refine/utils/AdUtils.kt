@@ -5,7 +5,7 @@ import com.app.refine.model.Config
 object AdUtils {
 
     private var interContentCount = 0
-    fun reqInterContentCount(): Boolean {
+    fun reqInterContent(): Boolean {
         interContentCount++
         if (Config.interContent.isShow)
             if (interContentCount >= Config.interContent.freq) {
@@ -16,7 +16,7 @@ object AdUtils {
     }
 
     private var interExitCount = 0
-    fun reqInterExitCount(): Boolean {
+    fun reqInterExit(): Boolean {
         interExitCount++
         if (Config.interExit.isShow)
             if (interExitCount >= Config.interExit.freq) {

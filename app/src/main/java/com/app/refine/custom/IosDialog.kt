@@ -12,7 +12,7 @@ import com.app.refine.databinding.DialogIosBinding
 
 class IosDialog(val context: Context, private val container: ViewGroup) {
 
-    private var binding: DialogIosBinding =
+    var binding: DialogIosBinding =
         DialogIosBinding.inflate((context as Activity).layoutInflater)
     private var isCancelable = true
 

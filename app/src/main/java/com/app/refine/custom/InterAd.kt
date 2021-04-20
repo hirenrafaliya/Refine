@@ -40,7 +40,7 @@ class InterAd(val context: Context) : OnInterAdListener {
     }
 
     override fun isInterstitialAdLoaded(): Boolean {
-        Log.d(TAG, "isInterstitialAdLoaded: ${interstitialAd.value != null}")
+        Log.d(TAG, "isInterstitialAdLoaded: ")
         return interstitialAd.value != null
     }
 

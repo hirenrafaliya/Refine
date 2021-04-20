@@ -96,7 +96,7 @@ class ContentActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (AdUtils.reqInterContentCount()) {
+        if (AdUtils.reqInterContent()) {
             RefineApp.onInterAdListener.showInterstitialAd(this)
         }
     }
