@@ -38,7 +38,7 @@ class ArticleActivity : AppCompatActivity() {
             ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
                 ArticleViewModel::class.java
             )
-
+        RefineApp.onInterAdListener.reInitInterstitialAd()
         getArticleList()
         checkForUpdates()
         binding.toolbar.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_toolbar))

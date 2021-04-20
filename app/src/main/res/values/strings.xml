@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Refine</string>
+
+    <string name="test_device_id">1579B8D74A20E0A36C850B2AE2BD12B9</string>
+    <string name="app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="banner_ad">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interstitial_ad">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="rewarded_ad">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="native_ad">ca-app-pub-3940256099942544/2247696110</string>
 </resources>
