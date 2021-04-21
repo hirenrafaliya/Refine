@@ -5,7 +5,7 @@
     <application
         android:name=".ui.RefineApp"
         android:allowBackup="true"
-        android:icon="@drawable/ic_square"
+        android:icon="@drawable/ic_full"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_circle"
         android:supportsRtl="true"

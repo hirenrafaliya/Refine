@@ -1,5 +1,6 @@
 package com.app.refine.utils
 
+import com.app.refine.BuildConfig
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,6 +25,7 @@ object Utils {
 
         map["userId"] = userId ?: "null"
         map["date"] = date
+        map["appVersion"] = BuildConfig.VERSION_NAME
 
         FirebaseFirestore
             .getInstance()

@@ -83,6 +83,5 @@ dependencies {
     implementation 'com.startapp:admob-mediation:2.4.0'
 
     implementation 'com.google.android.gms:play-services-ads:20.0.0'
-    implementation 'com.google.android.ads:mediation-test-suite:1.5.0'
 
 }

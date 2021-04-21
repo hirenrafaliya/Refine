@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/blue_p"
     tools:context=".ui.SplashActivity">
 
     <ImageView
         android:layout_width="@dimen/_140sdp"
         android:layout_height="@dimen/_140sdp"
-        android:src="@drawable/ic_foreground"
+        android:src="@drawable/ic_circle"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/imgSplash"
@@ -20,10 +21,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_13sdp"
-        android:textColor="@color/white_s"
-        android:text="Something went wrong"
-        android:visibility="gone"
+        android:textSize="@dimen/_14sdp"
+        android:textColor="@color/black_text_p"
+        android:text="Loading..."
+        android:visibility="visible"
         android:fontFamily="@font/ps_regular"
         app:layout_constraintTop_toBottomOf="@+id/imgSplash"
         app:layout_constraintStart_toStartOf="parent"
