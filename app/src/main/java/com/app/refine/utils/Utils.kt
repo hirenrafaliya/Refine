@@ -19,7 +19,7 @@ object Utils {
         return dateFormat.format(Date())
     }
 
-    fun logRemote(map: HashMap<String, String>) {
+    fun logRemote(map: HashMap<String, Any>) {
         val userId = MongoUtils.getApp().currentUser()?.deviceId
         val date = getCurrentDate()
 

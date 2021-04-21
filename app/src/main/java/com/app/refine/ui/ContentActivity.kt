@@ -111,7 +111,7 @@ class ContentActivity : AppCompatActivity() {
                 Pair("msg", "Article exit"),
                 Pair("articleId", article._id?.id ?: "null"),
                 Pair("tag", "article"),
-                Pair("duration", ((System.currentTimeMillis() - startTime) / 1000).toString())
+                Pair("duration", ((System.currentTimeMillis() - startTime) / 1000).toInt())
             )
         )
 

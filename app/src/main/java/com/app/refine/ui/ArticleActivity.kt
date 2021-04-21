@@ -116,7 +116,7 @@ class ArticleActivity : AppCompatActivity() {
                 Pair("msg", "App exit"), Pair("tag", "app"),
                 Pair(
                     "duration",
-                    ((System.currentTimeMillis() - RefineApp.startTime) / 1000).toString()
+                    ((System.currentTimeMillis() - RefineApp.startTime) / 1000).toInt()
                 )
             )
         )
