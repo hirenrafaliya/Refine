@@ -18,7 +18,7 @@ class ContentRepository {
 
         Log.d(TAG, "_id:${article._id}")
         val query = Document("_id",ObjectId(article._id?.id))
-        MongoUtils.getDatabase().getCollection("test").findOne(query)
+        MongoUtils.getDatabase().getCollection("articles").findOne(query)
             .getAsync {
                 if (it.isSuccess) {
                     Log.d(TAG, "getArticleContent: success")

@@ -76,3 +76,4 @@ class SplashActivity : AppCompatActivity() {
 }
 
 //todo: set text formatting in item_text
+//todo: remove multiple launcher activities from manifest

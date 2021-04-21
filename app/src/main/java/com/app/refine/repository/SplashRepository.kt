@@ -20,6 +20,7 @@ class SplashRepository {
                 user.postValue(it.get())
             } else {
                 Log.d(TAG, "loginAnonymousUser: failure : ${it.error}")
+                user.postValue(null)
                 loginError = it.error.toString()
             }
         }

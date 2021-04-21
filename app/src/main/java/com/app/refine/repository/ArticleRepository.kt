@@ -20,7 +20,7 @@ class ArticleRepository {
         //todo : remove limit in fut
         MongoUtils
             .getDatabase()
-            .getCollection("test")
+            .getCollection("articles")
             .find()
             .sort(sort)
             .projection(projection)

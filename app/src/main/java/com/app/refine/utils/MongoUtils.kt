@@ -5,9 +5,9 @@ import io.realm.mongodb.AppConfiguration
 
 object MongoUtils {
 
-    fun getApp() = App(AppConfiguration.Builder("learnapplication-hlukn").build())
+    fun getApp() = App(AppConfiguration.Builder("refine-yjnob").build())
     fun getMongoClient()= getApp().currentUser()?.getMongoClient("mongodb-atlas")!!
-    fun getDatabase() = getMongoClient().getDatabase("learn_db")!!
+    fun getDatabase() = getMongoClient().getDatabase("refinedb")!!
 
     //todo : solve problem of null db & client !! .?
 }

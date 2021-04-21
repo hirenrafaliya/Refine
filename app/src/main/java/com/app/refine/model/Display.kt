@@ -6,5 +6,5 @@ import java.io.Serializable
 data class Display(
     var title:String,
     var description:String,
-    val img:String,
+    var img:String,
 ):Serializable

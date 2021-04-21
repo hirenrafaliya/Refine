@@ -464,6 +464,16 @@
                     android:theme="@style/StyleAddEditText" />
 
                 <EditText
+                    android:id="@+id/edtTempId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_add_edit_text"
+                    android:hint="Temp Id"
+                    android:inputType="text"
+                    android:theme="@style/StyleAddEditText" />
+
+                <EditText
                     android:id="@+id/edtInd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

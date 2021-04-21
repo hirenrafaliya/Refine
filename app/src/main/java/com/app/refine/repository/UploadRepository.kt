@@ -15,7 +15,7 @@ class UploadRepository {
         gson.serializeNulls()
         MongoUtils
             .getDatabase()
-            .getCollection("test")
+            .getCollection("articles")
             .insertOne(Document.parse(gson.toJson(article)))
             .getAsync {
                 if (it.isSuccess) {

@@ -3,5 +3,6 @@ package com.app.refine.model
 import java.io.Serializable
 
 data class Metadata(
-    val createdOn: String
+    val createdOn: String,
+    var tempId: String,
 ) : Serializable

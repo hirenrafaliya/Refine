@@ -95,7 +95,7 @@ class UploadArticleActivity : AppCompatActivity() {
                 Display("", "", ""),
                 mutableListOf(),
                 0,
-                Metadata(Utils.getCurrentDate())
+                Metadata(Utils.getCurrentDate(),"")
             )
     }
 
@@ -212,7 +212,7 @@ class UploadArticleActivity : AppCompatActivity() {
                 AlignmentType.TEXT_START,
                 FontType.REGULAR,
                 8,
-                0,
+                8,
                 8,
                 0,
                 0,
@@ -363,11 +363,15 @@ class UploadArticleActivity : AppCompatActivity() {
             }
             edtImageUrl.addTextChangedListener {
                 if (it.toString().isNotBlank())
-                    article.display.description = it.toString()
+                    article.display.img = it.toString()
             }
             edtInd.addTextChangedListener {
                 if (it.toString().isNotBlank())
                     article.ind = it.toString().toInt()
+            }
+            edtTempId.addTextChangedListener{
+                if (it.toString().isNotBlank())
+                    article.metadata.tempId = it.toString()
             }
         }
     }

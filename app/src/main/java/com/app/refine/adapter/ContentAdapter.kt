@@ -222,8 +222,33 @@ class ContentAdapter(
             if (image.url != null)
                 Glide.with(holder.itemView.context)
                     .load(image.url)
-                    .placeholder(R.drawable.img_placeholder)
+//                    .placeholder(R.drawable.img_placeholder)
+                    .dontTransform()
                     .transition(DrawableTransitionOptions.withCrossFade(800))
+                    .addListener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            isFirstResource: Boolean,
+                        ): Boolean {
+                            return false
+                        }
+
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean,
+                        ): Boolean {
+                            val params=holder.binding.img.layoutParams
+                            params.height=ViewGroup.LayoutParams.WRAP_CONTENT
+                            holder.binding.img.layoutParams=params
+                            return false
+                        }
+
+                    })
                     .into(holder.binding.img)
 
             if (image.marginStart != null && image.marginTop != null && image.marginEnd != null && image.marginBottom != null) {

@@ -1,12 +1,11 @@
 package com.app.refine.adapter
 
-import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.refine.R
 import com.app.refine.constant.ArticleType
 import com.app.refine.databinding.ItemArticleBinding
 import com.app.refine.databinding.ItemBlankBinding
@@ -14,10 +13,11 @@ import com.app.refine.model.Article
 import com.app.refine.ui.ContentActivity
 import com.app.refine.utils.toHtml
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import org.bson.BsonObjectId
-import org.bson.codecs.pojo.annotations.BsonId
-import org.bson.types.ObjectId
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 
 class ArticleAdapter(val articleList: MutableList<Article>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -74,8 +74,32 @@ class ArticleAdapter(val articleList: MutableList<Article>) :
 
         Glide.with(holder.itemView.context)
             .load(article.display.img)
-            .placeholder(R.drawable.img_placeholder)
+//            .placeholder(R.drawable.img_placeholder)
             .transition(DrawableTransitionOptions.withCrossFade(400))
+            .addListener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    val params = holder.binding.imgDisplay.layoutParams
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    holder.binding.imgDisplay.layoutParams = params
+                    return false
+                }
+
+            })
             .into(holder.binding.imgDisplay)
 
         holder.binding.tvTitle.text = article.display.title.toHtml()
