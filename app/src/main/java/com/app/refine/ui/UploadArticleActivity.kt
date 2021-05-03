@@ -361,7 +361,7 @@ class UploadArticleActivity : AppCompatActivity() {
                 if (it.toString().isNotBlank())
                     article.display.description = it.toString()
             }
-            edtImageUrl.addTextChangedListener {
+            edtDisplayImg.addTextChangedListener {
                 if (it.toString().isNotBlank())
                     article.display.img = it.toString()
             }

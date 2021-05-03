@@ -24,8 +24,9 @@ class InterAd(val context: Context) : OnInterAdListener {
     override fun reInitInterstitialAd() {
         Log.d(TAG, "reInitInterstitialAd: ${Config.interExit.toString()}")
 
+            //todo: remove comments on initialization
         if (interstitialAd.value == null && !isLoading)
-            initializeInterstitialAd()
+//            initializeInterstitialAd()
         else
             Log.d(TAG, "reInit:notNull")
     }

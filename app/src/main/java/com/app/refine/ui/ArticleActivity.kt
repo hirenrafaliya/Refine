@@ -27,7 +27,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-
 class ArticleActivity : AppCompatActivity() {
     private val TAG = "artc_actv_tager"
 
