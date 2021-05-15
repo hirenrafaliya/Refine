@@ -82,6 +82,7 @@ dependencies {
     implementation 'com.factor:bouncy:1.8'
     implementation 'com.startapp:admob-mediation:2.4.0'
 
-    implementation 'com.google.android.gms:play-services-ads:20.0.0'
+    implementation 'com.google.android.gms:play-services-ads:20.1.0'
+    implementation "com.github.skydoves:transformationlayout:1.0.8"
 
 }

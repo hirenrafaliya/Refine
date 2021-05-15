@@ -108,7 +108,10 @@ class ArticleAdapter(val articleList: MutableList<Article>) :
         holder.binding.layoutParent.setOnClickListener {
             val intent = Intent(holder.itemView.context, ContentActivity::class.java)
             intent.putExtra("article", articleList[position])
-            holder.itemView.context.startActivity(intent)
+            val bundle =
+                holder.binding.layoutTransformation.withView(holder.itemView, "articleTransition")
+            intent.putExtra("TransformationParams",holder.binding.layoutTransformation.getParcelableParams())
+            holder.itemView.context.startActivity(intent, bundle)
         }
 
         Log.d(TAG, "onBindArticle toString: ${article._id.toString()}")

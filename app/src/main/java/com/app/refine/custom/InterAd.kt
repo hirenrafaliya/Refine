@@ -26,7 +26,7 @@ class InterAd(val context: Context) : OnInterAdListener {
 
             //todo: remove comments on initialization
         if (interstitialAd.value == null && !isLoading)
-//            initializeInterstitialAd()
+            initializeInterstitialAd()
         else
             Log.d(TAG, "reInit:notNull")
     }

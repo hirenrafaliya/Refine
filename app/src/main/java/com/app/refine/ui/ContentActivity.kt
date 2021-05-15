@@ -12,6 +12,7 @@ import com.app.refine.databinding.ActivityContentBinding
 import com.app.refine.model.Article
 import com.app.refine.utils.*
 import com.app.refine.viewmodel.ContentViewModel
+import com.skydoves.transformationlayout.onTransformationEndContainer
 
 class ContentActivity : AppCompatActivity() {
     private val TAG = "cont_actv_tager"
@@ -21,6 +22,7 @@ class ContentActivity : AppCompatActivity() {
     private val startTime = System.currentTimeMillis()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        onTransformationEndContainer(intent.getParcelableExtra("TransformationParams"))
         super.onCreate(savedInstanceState)
         binding = ActivityContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -29,6 +31,10 @@ class ContentActivity : AppCompatActivity() {
                 ContentViewModel::class.java
             )
         RefineApp.onInterAdListener.reInitInterstitialAd()
+
+        if (AdUtils.reqInterContent()) {
+            RefineApp.onInterAdListener.showInterstitialAd(this)
+        }
 
         getArticleContent()
     }
@@ -114,9 +120,5 @@ class ContentActivity : AppCompatActivity() {
                 Pair("duration", ((System.currentTimeMillis() - startTime) / 1000).toInt())
             )
         )
-
-        if (AdUtils.reqInterContent()) {
-            RefineApp.onInterAdListener.showInterstitialAd(this)
-        }
     }
 }

@@ -23,6 +23,7 @@ import com.app.refine.utils.toHtml
 import com.app.refine.viewmodel.ArticleViewModel
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.FullScreenContentCallback
+import com.skydoves.transformationlayout.onTransformationStartContainer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -35,6 +36,7 @@ class ArticleActivity : AppCompatActivity() {
     private var isLoadAd = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        onTransformationStartContainer()
         super.onCreate(savedInstanceState)
         binding = ActivityArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
