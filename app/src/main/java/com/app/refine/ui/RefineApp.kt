@@ -9,6 +9,7 @@ import com.app.refine.utils.Utils
 import com.app.refine.viewmodel.ConfigViewModel
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
+import com.google.firebase.analytics.FirebaseAnalytics
 import io.realm.Realm
 
 class RefineApp : Application() {
@@ -31,6 +32,7 @@ class RefineApp : Application() {
     private fun init() {
         Realm.init(this)
         DataStoreInstance.init(this)
+        FirebaseAnalytics.getInstance(this)
         MobileAds.setRequestConfiguration(
             RequestConfiguration.Builder()
                 .setTestDeviceIds(listOf(getString(R.string.test_device_id)))
