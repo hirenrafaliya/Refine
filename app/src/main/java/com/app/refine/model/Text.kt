@@ -1,7 +1,9 @@
 package com.app.refine.model
 
+import androidx.annotation.Keep
 import java.io.Serializable
 
+@Keep
 data class Text(
     var text: String,
     var size: Int,

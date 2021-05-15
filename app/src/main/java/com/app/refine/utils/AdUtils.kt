@@ -4,6 +4,7 @@ import com.app.refine.model.Config
 
 object AdUtils {
 
+    //todo : changed default values
     private var interContentCount = 0
     fun reqInterContent(): Boolean {
         interContentCount++
