@@ -27,10 +27,11 @@ object Utils {
         map["date"] = date
         map["appVersion"] = BuildConfig.VERSION_NAME
 
-        FirebaseFirestore
-            .getInstance()
-            .collection("logs")
-            .add(map)
+        if (!BuildConfig.DEBUG)
+            FirebaseFirestore
+                .getInstance()
+                .collection("logs")
+                .add(map)
 
     }
 
