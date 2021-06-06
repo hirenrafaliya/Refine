@@ -24,39 +24,6 @@ class RefineApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        init()
-        setConfigs()
-
     }
-
-    private fun init() {
-        Realm.init(this)
-        DataStoreInstance.init(this)
-        if (!BuildConfig.DEBUG)
-            FirebaseAnalytics.getInstance(this)
-        MobileAds.setRequestConfiguration(
-            RequestConfiguration.Builder()
-                .setTestDeviceIds(listOf(getString(R.string.test_device_id)))
-                .build()
-        )
-        MobileAds.initialize(this)
-        onInterAdListener = InterAd(this)
-
-        FirebaseMessaging.getInstance().subscribeToTopic("test")
-//        FirebaseMessaging.getInstance().subscribeToTopic("all")
-//        FirebaseMessaging.getInstance().subscribeToTopic("free")
-//        FirebaseMessaging.getInstance().subscribeToTopic(BuildConfig.VERSION_NAME)
-        //todo : remove comments
-    }
-
-    private fun setConfigs() {
-        val configViewModel = ConfigViewModel(this)
-
-        configViewModel.setConfigDataFromDataStore()
-        configViewModel.setConfigData()
-    }
-
-
 
 }

@@ -6,9 +6,19 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.app.refine.BuildConfig
+import com.app.refine.R
+import com.app.refine.custom.InterAd
 import com.app.refine.databinding.ActivitySplashBinding
+import com.app.refine.singleton.DataStoreInstance
 import com.app.refine.utils.Utils
+import com.app.refine.viewmodel.ConfigViewModel
 import com.app.refine.viewmodel.SplashViewModel
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.messaging.FirebaseMessaging
+import io.realm.Realm
 
 class SplashActivity : AppCompatActivity() {
 
@@ -26,6 +36,8 @@ class SplashActivity : AppCompatActivity() {
                 SplashViewModel::class.java
             )
 
+        init()
+        setConfigs()
         authenticateUser()
 
     }
@@ -96,6 +108,33 @@ class SplashActivity : AppCompatActivity() {
             binding.tvStatus.text = "Loading..."
             authenticateUser()
         }
+    }
+
+    private fun init() {
+        Realm.init(this.application)
+        DataStoreInstance.init(this.application)
+        if (!BuildConfig.DEBUG)
+            FirebaseAnalytics.getInstance(this.application)
+        MobileAds.setRequestConfiguration(
+            RequestConfiguration.Builder()
+                .setTestDeviceIds(listOf(getString(R.string.test_device_id)))
+                .build()
+        )
+        MobileAds.initialize(this.application)
+        RefineApp.onInterAdListener = InterAd(this.application)
+
+        FirebaseMessaging.getInstance().subscribeToTopic("test")
+//        FirebaseMessaging.getInstance().subscribeToTopic("all")
+//        FirebaseMessaging.getInstance().subscribeToTopic("free")
+//        FirebaseMessaging.getInstance().subscribeToTopic(BuildConfig.VERSION_NAME)
+        //todo : remove comments
+    }
+
+    private fun setConfigs() {
+        val configViewModel = ConfigViewModel(this.application)
+
+        configViewModel.setConfigDataFromDataStore()
+        configViewModel.setConfigData()
     }
 
 }
