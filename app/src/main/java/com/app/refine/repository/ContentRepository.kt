@@ -18,7 +18,7 @@ class ContentRepository {
         val articleLiveData = MutableLiveData<Article>()
 
         Log.d(TAG, "_id:${article._id}")
-        val query = Document("_id",ObjectId(article._id?.id))
+        val query = Document("_id",ObjectId(article._id.id))
         MongoUtils.getDatabase().getCollection("articles").findOne(query)
             .getAsync {
                 if (it.isSuccess) {
@@ -30,6 +30,7 @@ class ContentRepository {
                     Log.d(TAG, "getArticleContent: failure ${it.error}")
                     getArticleContentStatus.status = "failure"
                     getArticleContentStatus.error = it.error.toString()
+                    articleLiveData.postValue(Article())
                 }
             }
         return articleLiveData

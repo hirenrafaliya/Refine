@@ -48,16 +48,16 @@ class ContentActivity : AppCompatActivity() {
         Utils.logRemote(
             hashMapOf(
                 Pair("msg", "Article open"),
-                Pair("articleId", article._id?.id ?: "null"),
+                Pair("articleId", article._id.id ?: "null"),
                 Pair("tag", "article")
             )
         )
 
         viewModel.getArticleContent(article).observe(this, {
-            if (viewModel.getArticleContentStatus().isSuccess()) {
+            if (viewModel.getArticleContentStatus().status.isSuccess()) {
                 article = it
                 setArticleContent()
-            } else if (viewModel.getArticleContentStatus().isFailed()) {
+            } else if (viewModel.getArticleContentStatus().status.isFailed()) {
                 handleFailure()
             }
         })
@@ -69,7 +69,7 @@ class ContentActivity : AppCompatActivity() {
         binding.tvStatus.visibility = View.VISIBLE
 
         binding.tvStatus.text =
-            "Something went wrong\n${viewModel.getArticleContentStatus()}\nClick to retry"
+            "Something went wrong\n${viewModel.getArticleContentStatus().error}\nClick to retry"
 
         binding.tvStatus.setOnClickListener {
             binding.imgLoading.visibility = View.VISIBLE
@@ -88,6 +88,8 @@ class ContentActivity : AppCompatActivity() {
         }
 
         initRecyclerView()
+
+        viewModel.setReviewFlow(this,article._id.id,article.metadata.isShowReviewFlow)
 
     }
 

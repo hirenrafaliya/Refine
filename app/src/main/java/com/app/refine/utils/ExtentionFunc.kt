@@ -25,7 +25,7 @@ fun String.isSuccess(): Boolean {
 }
 
 fun String.isFailed(): Boolean {
-    return this != "success" && this != ""
+    return this != "loading" || this != "success"
 }
 
 fun Int.toSdp(context: Context): Float {

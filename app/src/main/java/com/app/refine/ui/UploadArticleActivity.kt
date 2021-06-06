@@ -90,7 +90,7 @@ class UploadArticleActivity : AppCompatActivity() {
     private fun initArticle() {
         article =
             Article(
-                null,
+                DocId(),
                 ArticleType.ARTICLE,
                 Display("", "", ""),
                 mutableListOf(),
@@ -106,7 +106,7 @@ class UploadArticleActivity : AppCompatActivity() {
     }
 
     private fun setActions() {
-        contentList.add(Content("BLANK", null, null, null))
+        contentList.add(Content("BLANK", Text(), Image(), Space()))
         binding.tvStatus.text = "P:$position"
 
         binding.apply {
@@ -155,7 +155,7 @@ class UploadArticleActivity : AppCompatActivity() {
             position++
             binding.tvStatus.text = "P:$position"
 
-            contentList.add(Content("BLANK", null, null, null))
+            contentList.add(Content("BLANK", Text(), Image(), Space()))
 
         } else {
             article.contentList.removeAt(position)
@@ -305,7 +305,7 @@ class UploadArticleActivity : AppCompatActivity() {
     private fun setLayoutAddImage() {
         contentList[position] = Content(
             ContentType.IMAGE,
-            null,
+            Text(),
             Image("", 8, 8, 8, 8, 2, 8, null),
             null
         )

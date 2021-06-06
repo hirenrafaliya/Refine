@@ -175,7 +175,7 @@ class ContentAdapter(
                                     )
                                 )
                             }
-                        } else if (text.action?.type != null) {
+                        } else if (text.action?.type != "") {
                             Toast.makeText(
                                 context,
                                 "This action is not supported in this version of the app",
@@ -282,7 +282,7 @@ class ContentAdapter(
                             )
                         }
                     }
-                } else if (image.action.type != null) {
+                } else if (image.action.type != "") {
                     Toast.makeText(
                         holder.itemView.context,
                         "This action is not supported in this version of the app",
