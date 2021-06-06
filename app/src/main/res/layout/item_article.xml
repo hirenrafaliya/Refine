@@ -1,49 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.skydoves.transformationlayout.TransformationLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutParent"
     android:layout_marginStart="@dimen/_4sdp"
-    android:id="@+id/layoutTransformation"
     android:layout_marginTop="@dimen/_4sdp"
     android:layout_marginEnd="@dimen/_4sdp"
-    style="@style/StyleTransformationLayout"
-    android:layout_marginBottom="@dimen/_6sdp">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_6sdp"
+    android:background="@drawable/bg_article_round"
+    android:elevation="@dimen/_1sdp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutParent"
+    <com.rishabhharit.roundedimageview.RoundedImageView
+        android:id="@+id/imgDisplay"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/_140sdp"
+        android:layout_margin="@dimen/_4sdp"
+        android:adjustViewBounds="true"
+        app:cornerRadius="@dimen/cornerRadius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_article_round"
-        android:elevation="@dimen/_1sdp">
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:fontFamily="@font/ps_bold"
+        android:text="Some Title for Article"
+        android:textColor="@color/black_text_p"
+        android:textSize="@dimen/_14sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgDisplay" />
 
-        <com.rishabhharit.roundedimageview.RoundedImageView
-            android:id="@+id/imgDisplay"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_140sdp"
-            android:layout_margin="@dimen/_4sdp"
-            android:adjustViewBounds="true"
-            app:cornerRadius="@dimen/cornerRadius"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:fontFamily="@font/ps_bold"
-            android:text="Some Title for Article"
-            android:textColor="@color/black_text_p"
-            android:textSize="@dimen/_14sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgDisplay" />
-
-        <TextView
+    <TextView
             android:id="@+id/tvDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -51,15 +45,14 @@
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:breakStrategy="simple"
-            android:fontFamily="@font/ps_regular"
-            android:text="To get Circular shape, all you need to do is set cornerRadius to a value that is higher than the width height of your RoundedImageView"
-            android:textColor="@color/black_text_s"
-            android:textSize="@dimen/_13sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        android:breakStrategy="simple"
+        android:fontFamily="@font/ps_regular"
+        android:text="To get Circular shape, all you need to do is set cornerRadius to a value that is higher than the width height of your RoundedImageView"
+        android:textColor="@color/black_text_s"
+        android:textSize="@dimen/_13sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.skydoves.transformationlayout.TransformationLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

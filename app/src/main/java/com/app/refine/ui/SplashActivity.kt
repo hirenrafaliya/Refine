@@ -7,7 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.app.refine.databinding.ActivitySplashBinding
-import com.app.refine.utils.MongoUtils
+import com.app.refine.utils.Utils
 import com.app.refine.viewmodel.SplashViewModel
 
 class SplashActivity : AppCompatActivity() {
@@ -37,13 +37,10 @@ class SplashActivity : AppCompatActivity() {
                         Log.d(TAG, "authenticateUser: accessToken=${it.accessToken}")
                         Log.d(TAG, "authenticateUser: refreshToken=${it.refreshToken}")
                         Log.d(TAG, "authenticateUser: id=${it.id}")
-                        startActivity(
-                            Intent(
-                                this@SplashActivity,
-                                ArticleActivity::class.java
-                            )
-                        )
-                        finish()
+
+                        Utils.logRemote(hashMapOf(Pair("msg", "App open"), Pair("tag", "app")))
+
+                        navigateUser()
                     }
                     viewmodel.isLoginFailed() -> {
                         handleFailure()
@@ -55,12 +52,48 @@ class SplashActivity : AppCompatActivity() {
             })
     }
 
+    private fun navigateUser() {
+        val open = intent.getStringExtra("open")
+        val articleId = intent.getStringExtra("articleId")
+
+        Log.d(TAG, "navigateUser: $open $articleId")
+
+        if (open.isNullOrBlank() || articleId.isNullOrBlank() || open.isNullOrEmpty() || articleId.isNullOrEmpty()) {
+            Log.d(TAG, "navigateUser: null null null null")
+            startActivity(
+                Intent(
+                    this@SplashActivity,
+                    ArticleActivity::class.java
+                )
+            )
+        } else {
+            if (open == "ContentActivity" && !articleId.isNullOrBlank() && !articleId.isNullOrEmpty()) {
+                Log.d(TAG, "navigateUser: ContentActivity")
+                val intent = Intent(this@SplashActivity, ContentActivity::class.java)
+                intent.putExtra("articleId", articleId)
+                startActivity(intent)
+            } else if (open == "ArticleActivity") {
+                Log.d(TAG, "navigateUser: ArticleActivity")
+                startActivity(Intent(this@SplashActivity, ArticleActivity::class.java))
+            } else {
+                Log.d(TAG, "navigateUser: elsee")
+                startActivity(
+                    Intent(
+                        this@SplashActivity,
+                        ArticleActivity::class.java
+                    )
+                )
+            }
+        }
+        finish()
+    }
+
     private fun handleFailure() {
         binding.tvStatus.visibility = View.VISIBLE
         binding.tvStatus.text = "Something went wrong\n${viewmodel.getLoginError()}\nClick to retry"
 
         binding.tvStatus.setOnClickListener {
-            binding.tvStatus.text="Loading..."
+            binding.tvStatus.text = "Loading..."
             authenticateUser()
         }
     }

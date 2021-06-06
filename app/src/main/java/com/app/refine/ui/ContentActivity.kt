@@ -1,5 +1,6 @@
 package com.app.refine.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -12,7 +13,6 @@ import com.app.refine.databinding.ActivityContentBinding
 import com.app.refine.model.Article
 import com.app.refine.utils.*
 import com.app.refine.viewmodel.ContentViewModel
-import com.skydoves.transformationlayout.onTransformationEndContainer
 
 class ContentActivity : AppCompatActivity() {
     private val TAG = "cont_actv_tager"
@@ -22,7 +22,6 @@ class ContentActivity : AppCompatActivity() {
     private val startTime = System.currentTimeMillis()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        onTransformationEndContainer(intent.getParcelableExtra("TransformationParams"))
         super.onCreate(savedInstanceState)
         binding = ActivityContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -43,7 +42,10 @@ class ContentActivity : AppCompatActivity() {
         binding.imgLoading.visibility = View.VISIBLE
         binding.imgLoading.startAnimation(getLoadingAnimation(this))
 
-        article = intent.getSerializableExtra("article") as Article
+        article = (intent.getSerializableExtra("article") ?: Article()) as Article
+        if (article._id.id.isBlank()) {
+            article._id.id = intent.getStringExtra("articleId") ?: ""
+        }
 
         Utils.logRemote(
             hashMapOf(
@@ -118,10 +120,17 @@ class ContentActivity : AppCompatActivity() {
         Utils.logRemote(
             hashMapOf(
                 Pair("msg", "Article exit"),
-                Pair("articleId", article._id?.id ?: "null"),
+                Pair("articleId", article._id.id ?: "null"),
                 Pair("tag", "article"),
                 Pair("duration", ((System.currentTimeMillis() - startTime) / 1000).toInt())
             )
         )
+
+        if (intent.getStringExtra("from") == "ArticleActivity") {
+            super.onBackPressed()
+        } else {
+            startActivity(Intent(this, ArticleActivity::class.java))
+            finish()
+        }
     }
 }

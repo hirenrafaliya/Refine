@@ -11,6 +11,7 @@ import com.app.refine.viewmodel.ConfigViewModel
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.messaging.FirebaseMessaging
 import io.realm.Realm
 
 class RefineApp : Application() {
@@ -26,7 +27,6 @@ class RefineApp : Application() {
 
         init()
         setConfigs()
-        setRemoteLogs()
 
     }
 
@@ -42,6 +42,12 @@ class RefineApp : Application() {
         )
         MobileAds.initialize(this)
         onInterAdListener = InterAd(this)
+
+        FirebaseMessaging.getInstance().subscribeToTopic("test")
+//        FirebaseMessaging.getInstance().subscribeToTopic("all")
+//        FirebaseMessaging.getInstance().subscribeToTopic("free")
+//        FirebaseMessaging.getInstance().subscribeToTopic(BuildConfig.VERSION_NAME)
+        //todo : remove comments
     }
 
     private fun setConfigs() {
@@ -51,9 +57,6 @@ class RefineApp : Application() {
         configViewModel.setConfigData()
     }
 
-    private fun setRemoteLogs() {
-        Utils.logRemote(hashMapOf(Pair("msg", "App open"), Pair("tag", "app")))
-    }
 
 
 }

@@ -7,5 +7,5 @@ import java.io.Serializable
 @Keep
 data class DocId(
     @SerializedName("\$oid")
-    val id: String=""
+    var id: String=""
 ) : Serializable
