@@ -1,6 +1,7 @@
 package com.app.refine.ui
 
 import android.app.Application
+import com.app.refine.BuildConfig
 import com.app.refine.R
 import com.app.refine.custom.InterAd
 import com.app.refine.listener.OnInterAdListener
@@ -32,7 +33,8 @@ class RefineApp : Application() {
     private fun init() {
         Realm.init(this)
         DataStoreInstance.init(this)
-        FirebaseAnalytics.getInstance(this)
+        if (!BuildConfig.DEBUG)
+            FirebaseAnalytics.getInstance(this)
         MobileAds.setRequestConfiguration(
             RequestConfiguration.Builder()
                 .setTestDeviceIds(listOf(getString(R.string.test_device_id)))

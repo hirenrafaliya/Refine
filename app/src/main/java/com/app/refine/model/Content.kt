@@ -5,8 +5,8 @@ import java.io.Serializable
 
 @Keep
 data class Content(
-    var type: String,
-    val text: Text?,
-    val image: Image?,
-    val space: Space?
+    var type: String="",
+    val text: Text= Text(),
+    val image: Image?= Image(),
+    val space: Space?=Space()
 ):Serializable

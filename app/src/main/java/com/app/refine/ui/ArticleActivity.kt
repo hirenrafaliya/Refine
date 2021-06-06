@@ -18,7 +18,6 @@ import com.app.refine.model.Article
 import com.app.refine.model.Config.update
 import com.app.refine.utils.AdUtils
 import com.app.refine.utils.Utils
-import com.app.refine.utils.getLoadingAnimation
 import com.app.refine.utils.toHtml
 import com.app.refine.viewmodel.ArticleViewModel
 import com.google.android.gms.ads.AdError
@@ -51,11 +50,11 @@ class ArticleActivity : AppCompatActivity() {
 
     private fun getArticleList() {
         binding.imgLoading.visibility = View.VISIBLE
-        binding.imgLoading.startAnimation(getLoadingAnimation(this))
-
+        binding.tvStatus.visibility = View.INVISIBLE
+        binding.imgLoading.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_loading))
         viewModel.getArticle().observe(this, {
             when {
-                it != null -> {
+                !viewModel.isGetArticleFailed() -> {
                     initRecyclerView(it)
                 }
                 viewModel.isGetArticleFailed() -> {
@@ -90,16 +89,15 @@ class ArticleActivity : AppCompatActivity() {
     }
 
     private fun handleFailure() {
+        Log.d(TAG, "handleFailure: ")
         binding.imgLoading.visibility = View.INVISIBLE
+        binding.imgLoading.clearAnimation()
         binding.tvStatus.visibility = View.VISIBLE
 
         binding.tvStatus.text =
             "Something went wrong\n${viewModel.getArticleError()}\nClick to retry"
 
         binding.tvStatus.setOnClickListener {
-            binding.imgLoading.visibility = View.VISIBLE
-            binding.tvStatus.visibility = View.GONE
-
             getArticleList()
         }
     }

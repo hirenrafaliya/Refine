@@ -65,6 +65,7 @@ class ContentActivity : AppCompatActivity() {
 
     private fun handleFailure() {
         binding.imgLoading.visibility = View.INVISIBLE
+        binding.imgLoading.clearAnimation()
         binding.tvStatus.visibility = View.VISIBLE
 
         binding.tvStatus.text =

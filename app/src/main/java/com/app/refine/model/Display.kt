@@ -6,7 +6,7 @@ import java.io.Serializable
 
 @Keep
 data class Display(
-    var title:String,
-    var description:String,
-    var img:String,
+    var title:String="",
+    var description:String="",
+    var img:String="",
 ):Serializable

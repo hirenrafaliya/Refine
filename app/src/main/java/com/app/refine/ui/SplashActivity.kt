@@ -31,10 +31,12 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun authenticateUser() {
-        if (MongoUtils.getApp().currentUser() == null) {
             viewmodel.loginAnonymousUser().observe(this, {
                 when {
                     it != null -> {
+                        Log.d(TAG, "authenticateUser: accessToken=${it.accessToken}")
+                        Log.d(TAG, "authenticateUser: refreshToken=${it.refreshToken}")
+                        Log.d(TAG, "authenticateUser: id=${it.id}")
                         startActivity(
                             Intent(
                                 this@SplashActivity,
@@ -51,16 +53,6 @@ class SplashActivity : AppCompatActivity() {
                     }
                 }
             })
-        } else {
-            Log.d(TAG, "authenticateUser: user already authenticated")
-            startActivity(
-                Intent(
-                    this@SplashActivity,
-                    ArticleActivity::class.java
-                )
-            )
-            finish()
-        }
     }
 
     private fun handleFailure() {

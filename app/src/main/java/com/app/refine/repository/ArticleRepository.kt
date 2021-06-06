@@ -37,8 +37,9 @@ class ArticleRepository {
                     Log.d(TAG, "getArticle: ${list.toString()}")
                     articleList.postValue(list)
                 } else {
-                Log.d(TAG, "getArticle: failure ${it.error}")
-                getArticleError=it.error.toString()
+                Log.d(TAG, "getArticle: failure ${it.error.errorMessage}")
+                getArticleError=it.error.errorMessage.toString()
+                    articleList.postValue(mutableListOf())
             }
         }
         return articleList

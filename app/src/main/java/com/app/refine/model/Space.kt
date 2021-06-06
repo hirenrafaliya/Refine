@@ -6,5 +6,5 @@ import java.io.Serializable
 
 @Keep
 data class Space(
-    val height: Int,
+    val height: Int=0,
 ):Serializable

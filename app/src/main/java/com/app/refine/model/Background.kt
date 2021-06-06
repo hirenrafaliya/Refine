@@ -5,10 +5,10 @@ import java.io.Serializable
 
 @Keep
 data class Background(
-    val cornerRadius: Int,
-    val solidColor: String,
-    val strokeColor: String,
-    val strokeWidth: Int,
-    val isRipple: Boolean,
-    val rippleColor: String
+    val cornerRadius: Int=0,
+    val solidColor: String="",
+    val strokeColor: String="",
+    val strokeWidth: Int=0,
+    val isRipple: Boolean=false,
+    val rippleColor: String=""
 ) : Serializable

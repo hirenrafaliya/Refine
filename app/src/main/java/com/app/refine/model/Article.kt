@@ -7,13 +7,13 @@ import java.io.Serializable
 
 @Keep
 data class Article(
-    val _id: DocId?,
-    var type: String,
-    val display: Display,
+    var _id: DocId = DocId(),
+    var type: String = "",
+    var display: Display = Display(),
+    var ind: Int = 0,
+    var metadata: Metadata = Metadata(),
     @SerializedName("contents")
-        val contentList: MutableList<Content>,
-    var ind: Int,
-    val metadata: Metadata
+    var contentList: MutableList<Content> = mutableListOf<Content>(),
 ):Serializable
 
 //todo : changed content => contents

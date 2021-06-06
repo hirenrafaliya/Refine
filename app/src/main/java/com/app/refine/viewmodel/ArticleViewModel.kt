@@ -19,6 +19,6 @@ class ArticleViewModel : ViewModel() {
         return articleList
     }
 
-    fun isGetArticleFailed(): Boolean = repository.getArticleError.isNotBlank()
+    fun isGetArticleFailed(): Boolean = repository.getArticleError != ""
     fun getArticleError(): String = repository.getArticleError
 }
