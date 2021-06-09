@@ -1,6 +1,7 @@
 package com.app.refine.ui
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,9 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.refine.BuildConfig
 import com.app.refine.R
 import com.app.refine.custom.InterAd
+import com.app.refine.custom.IosDialog
 import com.app.refine.databinding.ActivitySplashBinding
+import com.app.refine.model.Config
 import com.app.refine.singleton.DataStoreInstance
 import com.app.refine.utils.Utils
+import com.app.refine.utils.toHtml
 import com.app.refine.viewmodel.ConfigViewModel
 import com.app.refine.viewmodel.SplashViewModel
 import com.google.android.gms.ads.MobileAds
@@ -52,7 +56,7 @@ class SplashActivity : AppCompatActivity() {
 
                         Utils.logRemote(hashMapOf(Pair("msg", "App open"), Pair("tag", "app")))
 
-                        navigateUser()
+                        checkForUpdates()
                     }
                     viewmodel.isLoginFailed() -> {
                         handleFailure()
@@ -123,10 +127,10 @@ class SplashActivity : AppCompatActivity() {
         MobileAds.initialize(this.application)
         RefineApp.onInterAdListener = InterAd(this.application)
 
-        FirebaseMessaging.getInstance().subscribeToTopic("test")
-//        FirebaseMessaging.getInstance().subscribeToTopic("all")
-//        FirebaseMessaging.getInstance().subscribeToTopic("free")
-//        FirebaseMessaging.getInstance().subscribeToTopic(BuildConfig.VERSION_NAME)
+//        FirebaseMessaging.getInstance().subscribeToTopic("test")
+        FirebaseMessaging.getInstance().subscribeToTopic("all")
+        FirebaseMessaging.getInstance().subscribeToTopic("free")
+        FirebaseMessaging.getInstance().subscribeToTopic(BuildConfig.VERSION_NAME)
         //todo : remove comments
     }
 
@@ -136,6 +140,45 @@ class SplashActivity : AppCompatActivity() {
         configViewModel.setConfigDataFromDataStore()
         configViewModel.setConfigData()
     }
+
+    private fun checkForUpdates() {
+        if (Config.update.isShow) {
+            val lVersion = Config.update.latestVersion.replace(".", "").toInt()
+            val cVersion = BuildConfig.VERSION_NAME.replace(".", "").toInt()
+            //todo: change cVersion from BuildConfig bc it returns same value on different version
+
+            if (cVersion < lVersion) {
+                val dialog = IosDialog(this@SplashActivity, binding.layoutContainer)
+                dialog.setData(primaryBtnText = "Update", secondaryBtnText = "Later")
+                dialog.binding.tvTitle.text = Config.update.dialogTitle.toHtml()
+                dialog.binding.tvDesc.text = Config.update.dialogDesc.toHtml()
+                if (Config.update.isForceShow) {
+                    dialog.hideSecondaryBtn()
+                }
+                dialog.setIsCancelable(!Config.update.isForceShow)
+                dialog.show()
+
+                dialog.setPrimaryBtnOnClickListener {
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("market://details?id=${BuildConfig.APPLICATION_ID}")
+                        )
+                    )
+                }
+
+                dialog.binding.tvSecondary.setOnClickListener {
+                    navigateUser()
+                }
+
+            } else {
+                navigateUser()
+            }
+        } else {
+            navigateUser()
+        }
+    }
+
 
 }
 

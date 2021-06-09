@@ -42,7 +42,6 @@ class ArticleActivity : AppCompatActivity() {
                 ArticleViewModel::class.java
             )
         getArticleList()
-        checkForUpdates()
         binding.toolbar.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_toolbar))
     }
 
@@ -158,41 +157,6 @@ class ArticleActivity : AppCompatActivity() {
             finishAffinity()
         } catch (e: Exception) {
             e.printStackTrace()
-        }
-    }
-
-    private fun checkForUpdates() {
-        GlobalScope.launch(Dispatchers.IO) {
-
-            if (update.isShow) {
-                val lVersion = update.latestVersion.replace(".", "").toInt()
-                val cVersion = BuildConfig.VERSION_NAME.replace(".", "").toInt()
-                //todo: change cVersion from BuildConfig bc it returns same value on different version
-
-
-                if (cVersion < lVersion) {
-                    launch(Dispatchers.Main) {
-                        val dialog = IosDialog(this@ArticleActivity, binding.layoutContainer)
-                        dialog.setData(primaryBtnText = "Update",secondaryBtnText =  "Later")
-                        dialog.binding.tvTitle.text = update.dialogTitle.toHtml()
-                        dialog.binding.tvDesc.text = update.dialogDesc.toHtml()
-                        if (update.isForceShow) {
-                            dialog.hideSecondaryBtn()
-                        }
-                        dialog.setIsCancelable(!update.isForceShow)
-                        dialog.show()
-
-                        dialog.setPrimaryBtnOnClickListener {
-                            startActivity(
-                                Intent(
-                                    Intent.ACTION_VIEW,
-                                    Uri.parse("market://details?id=${BuildConfig.APPLICATION_ID}")
-                                )
-                            )
-                        }
-                    }
-                }
-            }
         }
     }
 }
