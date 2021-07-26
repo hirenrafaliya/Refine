@@ -7,4 +7,9 @@
     <string name="interstitial_ad">ca-app-pub-3940256099942544/1033173712</string>
     <string name="rewarded_ad">ca-app-pub-3940256099942544/5224354917</string>
     <string name="native_ad">ca-app-pub-3940256099942544/2247696110</string>
+
+<!--    <string name="app_id">ca-app-pub-5237662698478243~3003431423</string>-->
+<!--    <string name="banner_ad">ca-app-pub-5237662698478243/5387435079</string>-->
+<!--    <string name="interstitial_ad">ca-app-pub-5237662698478243/8691065898</string>-->
+
 </resources>

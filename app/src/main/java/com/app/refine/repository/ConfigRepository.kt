@@ -72,6 +72,8 @@ class ConfigRepository {
 
         isSetConfigLiveData.postValue(true)
 
+        setConfigDataFromDataStore()
+
     }
 
     fun isSetConfigLiveData(): Boolean = isSetConfigLiveData.value ?: false

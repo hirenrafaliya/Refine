@@ -30,12 +30,7 @@ class MessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-
-        FirebaseMessaging.getInstance().token.addOnSuccessListener {
-            Log.d(TAG, "onNewToken: $it")
-        }
     }
-
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)

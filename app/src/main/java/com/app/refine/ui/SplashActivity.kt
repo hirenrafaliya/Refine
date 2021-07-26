@@ -74,6 +74,10 @@ class SplashActivity : AppCompatActivity() {
 
         Log.d(TAG, "navigateUser: $open $articleId")
 
+        FirebaseMessaging.getInstance().token.addOnSuccessListener {
+            Log.d(TAG, "onNewToken: $it")
+        }
+
         if (open.isNullOrBlank() || articleId.isNullOrBlank() || open.isNullOrEmpty() || articleId.isNullOrEmpty()) {
             Log.d(TAG, "navigateUser: null null null null")
             startActivity(
@@ -82,6 +86,7 @@ class SplashActivity : AppCompatActivity() {
                     ArticleActivity::class.java
                 )
             )
+            //todo:check above UploadArticleActivity
         } else {
             if (open == "ContentActivity" && !articleId.isNullOrBlank() && !articleId.isNullOrEmpty()) {
                 Log.d(TAG, "navigateUser: ContentActivity")
@@ -91,6 +96,7 @@ class SplashActivity : AppCompatActivity() {
             } else if (open == "ArticleActivity") {
                 Log.d(TAG, "navigateUser: ArticleActivity")
                 startActivity(Intent(this@SplashActivity, ArticleActivity::class.java))
+                //todo:check above UploadArticleActivity
             } else {
                 Log.d(TAG, "navigateUser: elsee")
                 startActivity(
@@ -119,6 +125,7 @@ class SplashActivity : AppCompatActivity() {
         DataStoreInstance.init(this.application)
         if (!BuildConfig.DEBUG)
             FirebaseAnalytics.getInstance(this.application)
+
         MobileAds.setRequestConfiguration(
             RequestConfiguration.Builder()
                 .setTestDeviceIds(listOf(getString(R.string.test_device_id)))
